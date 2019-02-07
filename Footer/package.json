@@ -6,7 +6,8 @@
   "scripts": {
     "start": "npm run watch & live-server public",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "watch": "webpack --watch"
+    "watch": "webpack --watch",
+    "lint" : "eslint ./"
   },
   "keywords": [],
   "author": "",
@@ -17,6 +18,11 @@
     "@babel/preset-env": "^7.2.3",
     "@babel/preset-react": "^7.0.0",
     "babel-loader": "^8.0.5",
+    "eslint": "^5.13.0",
+    "eslint-config-airbnb": "^17.1.0",
+    "eslint-plugin-import": "^2.16.0",
+    "eslint-plugin-jsx-a11y": "^6.2.1",
+    "eslint-plugin-react": "^7.12.4",
     "live-server": "^1.2.1",
     "webpack": "^4.28.4",
     "webpack-cli": "^3.2.1"
