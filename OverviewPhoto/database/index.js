@@ -33,7 +33,7 @@ const allLinks = [
   'https://zagat-photos.imgix.net/ChIJa52AEWaHhYARNkV1i0pn-S4/976a23aa2d446e14f1a4f427fadf3ae9.jpg',
 ];
 
-const saveMainOne = (callback) => {
+const saveMainOne = () => {
   const links = [];
   for (let i = 1; i <= allLinks.length; i++) {
     const photo = {};
@@ -46,15 +46,15 @@ const saveMainOne = (callback) => {
   });
   MainPhoto.save((err) => {
     if (err) {
-      callback(err);
+      console.error(err);
     } else {
-      callback(null);
+      console.log('SAVED FIRST DATA');
     }
   });
 };
 
 
-const saveFakeData = (callback) => {
+const saveFakeData = () => {
   const allPromises = [];
   for (let id = 2; id <= 100; id++) {
     const randomPhotoNumber = Math.ceil(Math.random() * allLinks.length);
@@ -72,9 +72,11 @@ const saveFakeData = (callback) => {
     allPromises.push(newPhoto.save());
   }
   Promise.all(allPromises)
-    .then(() => callback(null))
-    .catch(err => callback(err));
+    .then(() => console.log('ALL DATA GENERATED'))
+    .catch(err => console.error(err));
 };
 
+saveMainOne();
+saveFakeData();
 module.exports.saveMainOne = saveMainOne;
 module.exports.saveFakeData = saveFakeData;
