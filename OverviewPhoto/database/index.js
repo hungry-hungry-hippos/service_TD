@@ -76,7 +76,14 @@ const saveFakeData = () => {
     .catch(err => console.error(err));
 };
 
+const findOne = (id, callback) => {
+  Photo.findOne({ id }).exec()
+    .then((err, data) => {
+      if (err) callback(err);
+      callback(null, data);
+    });
+};
+
 saveMainOne();
 saveFakeData();
-module.exports.saveMainOne = saveMainOne;
-module.exports.saveFakeData = saveFakeData;
+module.exports.findOne = findOne;
