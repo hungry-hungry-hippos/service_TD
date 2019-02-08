@@ -33,18 +33,48 @@ const allLinks = [
   'https://zagat-photos.imgix.net/ChIJa52AEWaHhYARNkV1i0pn-S4/976a23aa2d446e14f1a4f427fadf3ae9.jpg',
 ];
 
-let count = 2;
-
-const saveMainOne = () => {
+const saveMainOne = (callback) => {
   const links = [];
   for (let i = 1; i <= allLinks.length; i++) {
-    links.push({ i: allLinks[i] });
+    const photo = {};
+    photo[i] = allLinks[i - 1];
+    links.push(photo);
   }
   const MainPhoto = new Photo({
     id: 1,
     links,
   });
-  MainPhoto.save();
+  MainPhoto.save((err) => {
+    if (err) {
+      callback(err);
+    } else {
+      callback(null);
+    }
+  });
+};
+
+
+const saveFakeData = (callback) => {
+  const allPromises = [];
+  for (let id = 2; id <= 100; id++) {
+    const randomPhotoNumber = Math.ceil(Math.random() * allLinks.length);
+    const linkCollection = allLinks.slice(0, randomPhotoNumber);
+    const links = [];
+    for (let i = 1; i <= linkCollection.length; i++) {
+      const photo = {};
+      photo[i] = allLinks[i - 1];
+      links.push(photo);
+    }
+    const newPhoto = new Photo({
+      id,
+      links,
+    });
+    allPromises.push(newPhoto.save());
+  }
+  Promise.all(allPromises)
+    .then(() => callback(null))
+    .catch(err => callback(err));
 };
 
 module.exports.saveMainOne = saveMainOne;
+module.exports.saveFakeData = saveFakeData;
