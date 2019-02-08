@@ -8,7 +8,6 @@ mongoose.connect('mongodb://localhost/photos', (err) => {
   return console.log('DB connected');
 });
 
-
 const photoSchema = mongoose.Schema({
   id: { type: Number, unique: true },
   links: Array,
