@@ -1,6 +1,6 @@
 const style = {
   footertop: {
-    backgroundColor: '#101820',
+    backgroundColor: 'black',
     margin: '0',
     padding: '40px',
   },
@@ -9,6 +9,11 @@ const style = {
     display: 'flex',
     fontFamily: 'Roboto, san-serif',
     letterSpacing: '.013em',
+  },
+  icon: {
+    backgroundColor: 'white',
+    borderRadius: '54%',
+    border: 'black',
   },
 };
 
