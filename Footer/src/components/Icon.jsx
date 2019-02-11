@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Proptypes from 'prop-types';
+import style from '../style.module.css';
 
 class Icon extends Component {
   constructor(props) {
@@ -24,9 +25,7 @@ class Icon extends Component {
           <img
             alt=""
             src={hover ? black : white}
-            style={{
-              height: '48px', width: 'auto', backgroundColor: 'white', border: 'solid white 2px', borderRadius: '50%',
-            }}
+            className={style.icon}
           />
         </a>
       </div>

@@ -1,0 +1,13 @@
+.footertop {
+  background-color: black;
+  margin: 0;
+  padding: 40px;
+}
+
+.icon {
+  height: 48px;
+  width: auto;
+  background-color: white;
+  border: solid white 2px;
+  border-radius: 50%;
+}
