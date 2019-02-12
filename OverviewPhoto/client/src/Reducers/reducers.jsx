@@ -1,4 +1,4 @@
-import { REQUEST_PHOTOS_PENDING } from '../actionTypes';
+import { REQUEST_PHOTOS_PENDING } from './action/actionTypes';
 
 const initialState = {
   pending: false,
