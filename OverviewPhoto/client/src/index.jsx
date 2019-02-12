@@ -5,7 +5,5 @@ import App from './components/App';
 
 ReactDOM.render(
   <App />,
-  /* eslint-disable */
   document.getElementById('overview'),
-  /* eslint-enable */
 );
