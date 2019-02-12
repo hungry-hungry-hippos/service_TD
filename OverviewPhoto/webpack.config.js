@@ -19,6 +19,13 @@ module.exports = {
           },
         },
       },
+      {
+        test: /\.css$/,
+        exclude: /node_modules/,
+        use: [
+          'style-loader', 'css-loader?modules=true&camelCase=true',
+        ],
+      },
     ],
   },
   resolve: {
