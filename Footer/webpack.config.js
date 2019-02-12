@@ -2,10 +2,10 @@ const path = require('path');
 
 module.exports = {
   mode: 'development',
-  entry: path.resolve(__dirname, 'src', 'index.js'),
+  entry: path.resolve(__dirname, 'src'),
   output: {
     path: path.resolve(__dirname, 'public'),
-    filename: 'bundle.js'
+    filename: 'bundle.js',
   },
   module: {
     rules: [
@@ -15,14 +15,21 @@ module.exports = {
         use: {
           loader: 'babel-loader',
           options: {
-            presets: ['@babel/preset-env', '@babel/preset-react']
-          }
-        }
-      }
-    ]
+            presets: ['@babel/preset-env', '@babel/preset-react'],
+          },
+        },
+      },
+      {
+        test: /\.css$/,
+        exclude: /node_modules/,
+        use: [
+          'style-loader', 'css-loader?modules=true&camelCase=true',
+        ],
+      },
+    ],
   },
   resolve: {
-    extensions: ['.js', '.jsx']
+    extensions: ['.js', '.jsx'],
   },
-  devtool: "source-map"
+  devtool: 'source-map',
 };
