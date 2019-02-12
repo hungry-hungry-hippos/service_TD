@@ -86,24 +86,6 @@
 /************************************************************************/
 /******/ ({
 
-/***/ "./client/src/Reducers/action/actionTypes.jsx":
-/*!****************************************************!*\
-  !*** ./client/src/Reducers/action/actionTypes.jsx ***!
-  \****************************************************/
-/*! exports provided: REQUEST_PHOTOS_PENDING, REQUEST_PHOTOS_SUCCESS, REQUEST_PHOTOS_FAILED */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "REQUEST_PHOTOS_PENDING", function() { return REQUEST_PHOTOS_PENDING; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "REQUEST_PHOTOS_SUCCESS", function() { return REQUEST_PHOTOS_SUCCESS; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "REQUEST_PHOTOS_FAILED", function() { return REQUEST_PHOTOS_FAILED; });
-var REQUEST_PHOTOS_PENDING = 'REQUEST_PHOTOS_PENDING';
-var REQUEST_PHOTOS_SUCCESS = 'REQUEST_PHOTOS_SUCCESS';
-var REQUEST_PHOTOS_FAILED = 'REQUEST_PHOTOS_FAILED';
-
-/***/ }),
-
 /***/ "./client/src/Reducers/index.jsx":
 /*!***************************************!*\
   !*** ./client/src/Reducers/index.jsx ***!
@@ -132,7 +114,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _action_actionTypes__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./action/actionTypes */ "./client/src/Reducers/action/actionTypes.jsx");
+/* harmony import */ var _action_actionTypes__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../action/actionTypes */ "./client/src/action/actionTypes.jsx");
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -154,12 +136,42 @@ var requestPhotos = function requestPhotos() {
         pending: true
       });
 
+    case _action_actionTypes__WEBPACK_IMPORTED_MODULE_0__["REQUEST_PHOTOS_SUCCESS"]:
+      return _objectSpread({}, state, {
+        photos: action.payload,
+        pending: false
+      });
+
+    case _action_actionTypes__WEBPACK_IMPORTED_MODULE_0__["REQUEST_PHOTOS_FAILED"]:
+      return _objectSpread({}, state, {
+        error: action.payload,
+        pending: false
+      });
+
     default:
       return state;
   }
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (requestPhotos);
+
+/***/ }),
+
+/***/ "./client/src/action/actionTypes.jsx":
+/*!*******************************************!*\
+  !*** ./client/src/action/actionTypes.jsx ***!
+  \*******************************************/
+/*! exports provided: REQUEST_PHOTOS_PENDING, REQUEST_PHOTOS_SUCCESS, REQUEST_PHOTOS_FAILED */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "REQUEST_PHOTOS_PENDING", function() { return REQUEST_PHOTOS_PENDING; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "REQUEST_PHOTOS_SUCCESS", function() { return REQUEST_PHOTOS_SUCCESS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "REQUEST_PHOTOS_FAILED", function() { return REQUEST_PHOTOS_FAILED; });
+var REQUEST_PHOTOS_PENDING = 'REQUEST_PHOTOS_PENDING';
+var REQUEST_PHOTOS_SUCCESS = 'REQUEST_PHOTOS_SUCCESS';
+var REQUEST_PHOTOS_FAILED = 'REQUEST_PHOTOS_FAILED';
 
 /***/ }),
 

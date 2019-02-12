@@ -1,4 +1,8 @@
-import { REQUEST_PHOTOS_PENDING } from './action/actionTypes';
+import {
+  REQUEST_PHOTOS_PENDING,
+  REQUEST_PHOTOS_SUCCESS,
+  REQUEST_PHOTOS_FAILED,
+} from '../action/actionTypes';
 
 const initialState = {
   pending: false,
@@ -12,6 +16,18 @@ const requestPhotos = (state = initialState, action) => {
       return {
         ...state,
         pending: true,
+      };
+    case REQUEST_PHOTOS_SUCCESS:
+      return {
+        ...state,
+        photos: action.payload,
+        pending: false,
+      };
+    case REQUEST_PHOTOS_FAILED:
+      return {
+        ...state,
+        error: action.payload,
+        pending: false,
       };
     default:
       return state;
