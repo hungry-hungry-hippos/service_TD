@@ -86,6 +86,24 @@
 /************************************************************************/
 /******/ ({
 
+/***/ "./client/src/Reducers/action/actionTypes.jsx":
+/*!****************************************************!*\
+  !*** ./client/src/Reducers/action/actionTypes.jsx ***!
+  \****************************************************/
+/*! exports provided: REQUEST_PHOTOS_PENDING, REQUEST_PHOTOS_SUCCESS, REQUEST_PHOTOS_FAILED */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "REQUEST_PHOTOS_PENDING", function() { return REQUEST_PHOTOS_PENDING; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "REQUEST_PHOTOS_SUCCESS", function() { return REQUEST_PHOTOS_SUCCESS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "REQUEST_PHOTOS_FAILED", function() { return REQUEST_PHOTOS_FAILED; });
+var REQUEST_PHOTOS_PENDING = 'REQUEST_PHOTOS_PENDING';
+var REQUEST_PHOTOS_SUCCESS = 'REQUEST_PHOTOS_SUCCESS';
+var REQUEST_PHOTOS_FAILED = 'REQUEST_PHOTOS_FAILED';
+
+/***/ }),
+
 /***/ "./client/src/Reducers/index.jsx":
 /*!***************************************!*\
   !*** ./client/src/Reducers/index.jsx ***!
@@ -114,7 +132,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _actionTypes__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actionTypes */ "./client/src/actionTypes.jsx");
+/* harmony import */ var _action_actionTypes__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./action/actionTypes */ "./client/src/Reducers/action/actionTypes.jsx");
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -131,7 +149,7 @@ var requestPhotos = function requestPhotos() {
   var action = arguments.length > 1 ? arguments[1] : undefined;
 
   switch (action.type) {
-    case _actionTypes__WEBPACK_IMPORTED_MODULE_0__["REQUEST_PHOTOS_PENDING"]:
+    case _action_actionTypes__WEBPACK_IMPORTED_MODULE_0__["REQUEST_PHOTOS_PENDING"]:
       return _objectSpread({}, state, {
         pending: true
       });
@@ -142,22 +160,6 @@ var requestPhotos = function requestPhotos() {
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (requestPhotos);
-
-/***/ }),
-
-/***/ "./client/src/actionTypes.jsx":
-/*!************************************!*\
-  !*** ./client/src/actionTypes.jsx ***!
-  \************************************/
-/*! exports provided: REQUEST_PHOTOS_PENDING, REQUEST_PHOTOS_SUCCESS */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "REQUEST_PHOTOS_PENDING", function() { return REQUEST_PHOTOS_PENDING; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "REQUEST_PHOTOS_SUCCESS", function() { return REQUEST_PHOTOS_SUCCESS; });
-var REQUEST_PHOTOS_PENDING = 'REQUEST_PENDING';
-var REQUEST_PHOTOS_SUCCESS = 'REQUEST_SUCCESS';
 
 /***/ }),
 
@@ -205,11 +207,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_App__WEBPACK_IMPORTED_MODULE_2__["default"], null),
-/* eslint-disable */
-document.getElementById('overview')
-/* eslint-enable */
-);
+react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_App__WEBPACK_IMPORTED_MODULE_2__["default"], null), document.getElementById('overview'));
 
 /***/ }),
 
