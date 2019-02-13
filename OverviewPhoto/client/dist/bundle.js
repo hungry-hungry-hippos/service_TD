@@ -323,24 +323,19 @@ function (_Component) {
       }
 
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: _overview_module_css__WEBPACK_IMPORTED_MODULE_4___default.a.body
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "row"
+        className: "".concat(_overview_module_css__WEBPACK_IMPORTED_MODULE_4___default.a.body, " container-fluid")
       }, photos.map(function (link) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: _overview_module_css__WEBPACK_IMPORTED_MODULE_4___default.a.photos
+          className: "".concat(_overview_module_css__WEBPACK_IMPORTED_MODULE_4___default.a.photos, " clearfix"),
+          key: link.photoId
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: _overview_module_css__WEBPACK_IMPORTED_MODULE_4___default.a.photo
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
           src: link.photo_url,
           alt: "",
-          key: link.photoId,
-          style: {
-            height: 'auto',
-            width: '100%'
-          }
+          className: "img-fluid ".concat(_overview_module_css__WEBPACK_IMPORTED_MODULE_4___default.a.img)
         })));
-      })));
+      }));
     }
   }]);
 
@@ -552,13 +547,14 @@ function _objectWithoutPropertiesLoose(source, excluded) {
 
 exports = module.exports = __webpack_require__(/*! ../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js")(false);
 // Module
-exports.push([module.i, "._1RE3uB4Guj7M0wpKWtgIgv {\n  margin: 0;\n  overflow: hidden;\n}\n\n.MhnDLXeMb4AmOQQfNDCsx {\n  display: block;\n  float: left;\n  width: 25%\n}\n\n._1SjL8WmHOgJqQrr3YNTOvA {\n  width: 100%;\n  height: 300px;\n  transform:  scale(1);\n  transition: transform 0.5s;\n}\n\n._1SjL8WmHOgJqQrr3YNTOvA:hover {\n  opacity: 0.9;\n  filter: brightness(90%);\n  transform: scale(1.03)\n}", ""]);
+exports.push([module.i, "._1RE3uB4Guj7M0wpKWtgIgv {\n  margin: 0;\n  overflow: hidden;\n  width: 100%\n}\n\n.MhnDLXeMb4AmOQQfNDCsx {\n  display: block;\n  float: left;\n  width: 25%\n}\n\n._1SjL8WmHOgJqQrr3YNTOvA {\n  width: 100%;\n  height: 300px;\n  transform:  scale(1);\n  transition: transform 0.5s;\n}\n\n._1SjL8WmHOgJqQrr3YNTOvA:hover {\n  opacity: 0.9;\n  filter: brightness(90%);\n  transform: scale(1.03)\n}\n\n._1l1SEllJO9YAN3zkiK8JEa {\n  height: 350px;\n  width: 350px;\n}", ""]);
 
 // Exports
 exports.locals = {
 	"body": "_1RE3uB4Guj7M0wpKWtgIgv",
 	"photos": "MhnDLXeMb4AmOQQfNDCsx",
-	"photo": "_1SjL8WmHOgJqQrr3YNTOvA"
+	"photo": "_1SjL8WmHOgJqQrr3YNTOvA",
+	"img": "_1l1SEllJO9YAN3zkiK8JEa"
 };
 
 /***/ }),

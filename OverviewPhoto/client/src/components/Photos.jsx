@@ -26,16 +26,14 @@ class Photos extends Component {
       );
     }
     return (
-      <div className={style.body}>
-        <div className="row">
-          {photos.map(link => (
-            <div className={style.photos}>
-              <div className={style.photo}>
-                <img src={link.photo_url} alt="" key={link.photoId} style={{ height: 'auto', width: '100%' }} />
-              </div>
+      <div className={`${style.body} container-fluid`}>
+        {photos.map(link => (
+          <div className={`${style.photos} clearfix`} key={link.photoId}>
+            <div className={style.photo}>
+              <img src={link.photo_url} alt="" className={`img-fluid ${style.img}`} />
             </div>
-          ))}
-        </div>
+          </div>
+        ))}
       </div>
     );
   }
