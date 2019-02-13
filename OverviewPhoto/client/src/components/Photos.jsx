@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Proptypes from 'prop-types';
 import requestPhotos from '../action/actions';
+import style from '../overview.module.css';
 
 class Photos extends Component {
   componentDidMount() {
@@ -10,7 +11,8 @@ class Photos extends Component {
   }
 
   render() {
-    const { pending, photos } = this.props;
+    let { pending, photos } = this.props;
+    photos = photos.slice(0, 4);
     if (pending && !photos.length) {
       return (
         <div className="d-flex justify-content-center">
@@ -24,10 +26,14 @@ class Photos extends Component {
       );
     }
     return (
-      <div className="container">
-        <div className="row d-flex">
+      <div className={style.body}>
+        <div className="row">
           {photos.map(link => (
-            <img src={link.photo_url} alt="" key={link.photoId} style={{ height: '150px', width: 'auto' }} className="flex-item" />
+            <div className={style.photos}>
+              <div className={style.photo}>
+                <img src={link.photo_url} alt="" key={link.photoId} style={{ height: 'auto', width: '100%' }} />
+              </div>
+            </div>
           ))}
         </div>
       </div>
