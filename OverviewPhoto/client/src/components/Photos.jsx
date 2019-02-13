@@ -4,12 +4,10 @@ import Proptypes from 'prop-types';
 import requestPhotos from '../action/actions';
 
 class Photos extends Component {
-  constructor(props){
-    super(props);
-    this.state = {
-      test: '',
-    }
-  };
+  componentDidMount() {
+    const { onRequestPhotos } = this.props;
+    onRequestPhotos();
+  }
 
   render() {
     const { pending, photos } = this.props;
@@ -40,6 +38,7 @@ const mapDispatchToProps = dispatch => (
 Photos.propTypes = {
   photos: Proptypes.instanceOf(Array).isRequired,
   pending: Proptypes.bool.isRequired,
+  onRequestPhotos: Proptypes.func.isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Photos);

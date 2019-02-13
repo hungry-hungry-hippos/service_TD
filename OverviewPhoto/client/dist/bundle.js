@@ -192,12 +192,12 @@ var requestPhotos = function requestPhotos() {
     dispatch({
       type: _actionTypes__WEBPACK_IMPORTED_MODULE_0__["REQUEST_PHOTOS_PENDING"]
     });
-    fetch('https://localhost:3020/1').then(function (response) {
+    fetch('http://localhost:3020/1').then(function (response) {
       return response.json();
     }).then(function (data) {
       return dispatch({
         type: _actionTypes__WEBPACK_IMPORTED_MODULE_0__["REQUEST_PHOTOS_SUCCESS"],
-        payload: data
+        payload: data.links
       });
     }).catch(function (error) {
       return dispatch({
@@ -284,19 +284,19 @@ var Photos =
 function (_Component) {
   _inherits(Photos, _Component);
 
-  function Photos(props) {
-    var _this;
-
+  function Photos() {
     _classCallCheck(this, Photos);
 
-    _this = _possibleConstructorReturn(this, _getPrototypeOf(Photos).call(this, props));
-    _this.state = {
-      test: ''
-    };
-    return _this;
+    return _possibleConstructorReturn(this, _getPrototypeOf(Photos).apply(this, arguments));
   }
 
   _createClass(Photos, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      var onRequestPhotos = this.props.onRequestPhotos;
+      onRequestPhotos();
+    }
+  }, {
     key: "render",
     value: function render() {
       var _this$props = this.props,
@@ -331,7 +331,8 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
 
 Photos.propTypes = {
   photos: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.instanceOf(Array).isRequired,
-  pending: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.bool.isRequired
+  pending: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.bool.isRequired,
+  onRequestPhotos: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.func.isRequired
 };
 /* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapStateToProps, mapDispatchToProps)(Photos));
 

@@ -6,9 +6,9 @@ import {
 
 const requestPhotos = () => (dispatch) => {
   dispatch({ type: REQUEST_PHOTOS_PENDING });
-  fetch('https://localhost:3020/1')
+  fetch('http://localhost:3020/1')
     .then(response => response.json())
-    .then(data => dispatch({ type: REQUEST_PHOTOS_SUCCESS, payload: data }))
+    .then(data => dispatch({ type: REQUEST_PHOTOS_SUCCESS, payload: data.links }))
     .catch(error => dispatch({ type: REQUEST_PHOTOS_FAILED, payload: error }));
 };
 
