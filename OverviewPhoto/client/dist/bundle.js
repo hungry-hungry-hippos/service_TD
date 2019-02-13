@@ -192,7 +192,7 @@ var requestPhotos = function requestPhotos() {
     dispatch({
       type: _actionTypes__WEBPACK_IMPORTED_MODULE_0__["REQUEST_PHOTOS_PENDING"]
     });
-    fetch('http://localhost:3020/1').then(function (response) {
+    fetch('http://localhost:3020/api/1').then(function (response) {
       return response.json();
     }).then(function (data) {
       return dispatch({
