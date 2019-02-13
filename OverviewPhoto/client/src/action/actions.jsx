@@ -6,7 +6,8 @@ import {
 
 const requestPhotos = () => (dispatch) => {
   dispatch({ type: REQUEST_PHOTOS_PENDING });
-  fetch('http://localhost:3020/api/1')
+  const id = parseInt(window.location.pathname.slice(1), 10);
+  fetch(`http://localhost:3020/api/${id}`)
     .then(response => response.json())
     .then(data => dispatch({ type: REQUEST_PHOTOS_SUCCESS, payload: data.links }))
     .catch(error => dispatch({ type: REQUEST_PHOTOS_FAILED, payload: error }));
