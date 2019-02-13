@@ -33,6 +33,7 @@
     "mongoose": "^5.4.10",
     "morgan": "^1.9.1",
     "path": "^0.12.7",
+    "prop-types": "^15.7.1",
     "react": "^16.7.0",
     "react-dom": "^16.7.0",
     "react-redux": "^6.0.0",

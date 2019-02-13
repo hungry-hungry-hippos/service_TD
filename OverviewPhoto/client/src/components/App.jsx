@@ -1,11 +1,12 @@
 import React from 'react';
 import { Provider } from 'react-redux';
 import store from '../store';
+import Photos from './Photos';
 
 const App = () => (
   <Provider store={store}>
     <div>
-      <h1>Hello world</h1>
+      <Photos />
     </div>
   </Provider>
 );
