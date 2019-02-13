@@ -324,7 +324,7 @@ function (_Component) {
           alt: "",
           key: link.photoId,
           style: {
-            height: '100px',
+            height: '150px',
             width: 'auto'
           },
           className: "flex-item"
