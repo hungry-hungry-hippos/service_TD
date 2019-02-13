@@ -11,6 +11,7 @@ app.use(parser.json());
 
 app.use(express.static('client/dist'));
 
+
 app.get('/api/:id', (req, res) => {
   const { id } = req.params;
   findOne(id, (err, data) => {

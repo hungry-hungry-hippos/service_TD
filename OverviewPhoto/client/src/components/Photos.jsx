@@ -15,7 +15,10 @@ class Photos extends Component {
       return (
         <div className="d-flex justify-content-center">
           <div className="spinner-border" role="status">
-            <span className="sr-only">Loading...</span>
+            <span className="sr-only">
+              Loading...
+              Please go to a specific restaurant if you have not already done so
+            </span>
           </div>
         </div>
       );

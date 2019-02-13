@@ -193,19 +193,22 @@ var requestPhotos = function requestPhotos() {
       type: _actionTypes__WEBPACK_IMPORTED_MODULE_0__["REQUEST_PHOTOS_PENDING"]
     });
     var id = parseInt(window.location.pathname.slice(1), 10);
-    fetch("http://localhost:3020/api/".concat(id)).then(function (response) {
-      return response.json();
-    }).then(function (data) {
-      return dispatch({
-        type: _actionTypes__WEBPACK_IMPORTED_MODULE_0__["REQUEST_PHOTOS_SUCCESS"],
-        payload: data.links
+
+    if (!Number.isNaN(id)) {
+      fetch("http://localhost:3020/api/".concat(id)).then(function (response) {
+        return response.json();
+      }).then(function (data) {
+        return dispatch({
+          type: _actionTypes__WEBPACK_IMPORTED_MODULE_0__["REQUEST_PHOTOS_SUCCESS"],
+          payload: data.links
+        });
+      }).catch(function (error) {
+        return dispatch({
+          type: _actionTypes__WEBPACK_IMPORTED_MODULE_0__["REQUEST_PHOTOS_FAILED"],
+          payload: error
+        });
       });
-    }).catch(function (error) {
-      return dispatch({
-        type: _actionTypes__WEBPACK_IMPORTED_MODULE_0__["REQUEST_PHOTOS_FAILED"],
-        payload: error
-      });
-    });
+    }
   };
 };
 
@@ -312,7 +315,7 @@ function (_Component) {
           role: "status"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
           className: "sr-only"
-        }, "Loading...")));
+        }, "Loading... Please go to a specific restaurant if you have not already done so")));
       }
 
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
