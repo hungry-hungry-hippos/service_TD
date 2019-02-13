@@ -22,9 +22,11 @@ class Photos extends Component {
     }
     return (
       <div className="container">
-        {/* {photos.map(link => (
-          <img src={link[1]} alt="" />
-        ))} */}
+        <div className="row d-flex">
+          {photos.map(link => (
+            <img src={link.photo_url} alt="" key={link.photoId} style={{ height: '100px', width: 'auto' }} className="flex-item" />
+          ))}
+        </div>
       </div>
     );
   }

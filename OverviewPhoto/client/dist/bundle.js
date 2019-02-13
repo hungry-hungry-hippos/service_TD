@@ -316,7 +316,20 @@ function (_Component) {
 
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "container"
-      });
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "row d-flex"
+      }, photos.map(function (link) {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+          src: link.photo_url,
+          alt: "",
+          key: link.photoId,
+          style: {
+            height: '100px',
+            width: 'auto'
+          },
+          className: "flex-item"
+        });
+      })));
     }
   }]);
 
