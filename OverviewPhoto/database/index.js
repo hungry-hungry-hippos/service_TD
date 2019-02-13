@@ -76,8 +76,8 @@ const saveFakeData = () => {
 };
 
 const findOne = (id, callback) => {
-  Photo.findOne({ id }).exec()
-    .then((err, data) => {
+  Photo.findOne({ id },
+    (err, data) => {
       if (err) callback(err);
       callback(null, data);
     });

@@ -304,7 +304,14 @@ function (_Component) {
           photos = _this$props.photos;
 
       if (pending && !photos.length) {
-        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Loading");
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "d-flex justify-content-center"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "spinner-border",
+          role: "status"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+          className: "sr-only"
+        }, "Loading...")));
       }
 
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Hello World");
