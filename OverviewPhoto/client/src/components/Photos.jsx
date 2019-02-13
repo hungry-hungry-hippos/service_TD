@@ -21,7 +21,11 @@ class Photos extends Component {
       );
     }
     return (
-      <h1>Hello World</h1>
+      <div className="container">
+        {/* {photos.map(link => (
+          <img src={link[1]} alt="" />
+        ))} */}
+      </div>
     );
   }
 }

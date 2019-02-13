@@ -10,7 +10,12 @@ mongoose.connect('mongodb://localhost/photos', (err) => {
 
 const photoSchema = mongoose.Schema({
   id: { type: Number, unique: true },
-  links: Array,
+  links: [
+    {
+      photoId: Number,
+      photo_url: String,
+    },
+  ],
 });
 
 const Photo = mongoose.model('Photo', photoSchema);
@@ -36,7 +41,8 @@ const saveMainOne = () => {
   const links = [];
   for (let i = 1; i <= allLinks.length; i++) {
     const photo = {};
-    photo[i] = allLinks[i - 1];
+    photo.photoId = i;
+    photo.photo_url = allLinks[i - 1];
     links.push(photo);
   }
   const MainPhoto = new Photo({
@@ -61,7 +67,8 @@ const saveFakeData = () => {
     const links = [];
     for (let i = 1; i <= linkCollection.length; i++) {
       const photo = {};
-      photo[i] = allLinks[i - 1];
+      photo.photoId = i;
+      photo.photo_url = allLinks[i - 1];
       links.push(photo);
     }
     const newPhoto = new Photo({
