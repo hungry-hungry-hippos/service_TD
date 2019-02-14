@@ -289,26 +289,75 @@ var ModalPhotos =
 function (_Component) {
   _inherits(ModalPhotos, _Component);
 
-  function ModalPhotos() {
+  function ModalPhotos(props) {
+    var _this;
+
     _classCallCheck(this, ModalPhotos);
 
-    return _possibleConstructorReturn(this, _getPrototypeOf(ModalPhotos).apply(this, arguments));
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(ModalPhotos).call(this, props));
+    _this.state = {
+      showModal: false
+    };
+    return _this;
   }
 
   _createClass(ModalPhotos, [{
-    key: "onClick",
-    value: function onClick() {
-      console.log('click', this);
+    key: "toggleModal",
+    value: function toggleModal() {
+      var showModal = this.state.showModal;
+      this.setState({
+        showModal: !showModal
+      });
     }
   }, {
     key: "render",
     value: function render() {
       var photos = this.props.photos;
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+      var showModal = this.state.showModal;
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, !showModal && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         type: "button",
-        className: _overview_module_css__WEBPACK_IMPORTED_MODULE_3___default.a.button,
-        onClick: this.onClick.bind(this)
-      }, "".concat(photos.length, " PHOTOS \u25B7"));
+        className: "".concat(_overview_module_css__WEBPACK_IMPORTED_MODULE_3___default.a.button, " ModalPhotos"),
+        onClick: this.toggleModal.bind(this),
+        "data-toggle": "modal",
+        "data-target": "#ModalPhotos"
+      }, "".concat(photos.length, " PHOTOS \u25B7")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "modal constainer",
+        show: showModal.toString(),
+        style: {
+          display: "".concat(showModal ? 'block' : 'none')
+        },
+        id: "ModalPhotos",
+        tabIndex: "-1",
+        role: "dialog",
+        onClick: this.toggleModal.bind(this),
+        "aria-labelledby": "ModalPhotosCenterTitle",
+        "aria-hidden": "true"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "modal-dialog",
+        role: "document"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "modal-content bg-dark text-white"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "modal-header"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", {
+        className: "modal-title"
+      }, "Restaurant Name"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        type: "button",
+        className: "close",
+        "data-dismiss": "modal",
+        "aria-label": "Close"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        "aria-hidden": "true",
+        className: "text-white"
+      }, " \xD7 "))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "modal-body"
+      }, photos.length && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: _overview_module_css__WEBPACK_IMPORTED_MODULE_3___default.a.photo
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+        src: photos[0].photo_url,
+        alt: "",
+        className: _overview_module_css__WEBPACK_IMPORTED_MODULE_3___default.a.img
+      })))))));
     }
   }]);
 
