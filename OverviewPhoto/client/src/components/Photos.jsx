@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import Proptypes from 'prop-types';
 import requestPhotos from '../action/actions';
 import style from '../overview.module.css';
+import ModalPhotos from './ModalPhotos';
 
 class Photos extends Component {
   componentDidMount() {
@@ -36,7 +37,7 @@ class Photos extends Component {
             </div>
           ))}
         </div>
-        <button type="button" className={style.button}>{`${photos.length} PHOTOS ▷`}</button>
+        <ModalPhotos />
       </div>
     );
   }
