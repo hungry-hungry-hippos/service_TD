@@ -33,9 +33,11 @@
 }
 
 .button {
+  padding: 8px;
   font-size: 11px;
   color: #ffffff;
-  opacity: 0.8;
+  background-color: #343434;
+  opacity: 0.7;
   position: fixed;
   right: 50px;
   top: 130px;

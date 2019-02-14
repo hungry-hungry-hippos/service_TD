@@ -36,7 +36,7 @@ class Photos extends Component {
             </div>
           ))}
         </div>
-        <button type="button" className={`btn btn-dark ${style.button}`}>{`${photos.length} PHOTOS ▷`}</button>
+        <button type="button" className={style.button}>{`${photos.length} PHOTOS ▷`}</button>
       </div>
     );
   }

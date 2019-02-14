@@ -337,7 +337,7 @@ function (_Component) {
         })));
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         type: "button",
-        className: "btn btn-dark ".concat(_overview_module_css__WEBPACK_IMPORTED_MODULE_4___default.a.button)
+        className: _overview_module_css__WEBPACK_IMPORTED_MODULE_4___default.a.button
       }, "".concat(photos.length, " PHOTOS \u25B7")));
     }
   }]);
@@ -550,7 +550,7 @@ function _objectWithoutPropertiesLoose(source, excluded) {
 
 exports = module.exports = __webpack_require__(/*! ../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js")(false);
 // Module
-exports.push([module.i, "._1RE3uB4Guj7M0wpKWtgIgv {\n  position: relative;\n}\n.HYxnprmpyHB8-f0sUR8vz {\n  margin: 0;\n  overflow: hidden;\n  width: 100%;\n  display: flex;\n  justify-content: space-around;\n}\n\n.MhnDLXeMb4AmOQQfNDCsx {\n  display: flex;\n  width: 25%\n}\n\n._1SjL8WmHOgJqQrr3YNTOvA {\n  width: 100%;\n  height: 300px;\n  transform:  scale(1);\n  transition: transform 0.7s;\n}\n\n._1SjL8WmHOgJqQrr3YNTOvA:hover {\n  opacity: 0.9;\n  filter: brightness(90%);\n  transform: scale(1.03)\n}\n\n._1l1SEllJO9YAN3zkiK8JEa {\n  height: 350px;\n  width: 350px;\n}\n\n._26_4cDsfGTzKAX8Wkg3OKV {\n  font-size: 11px;\n  color: #ffffff;\n  opacity: 0.8;\n  position: fixed;\n  right: 50px;\n  top: 130px;\n}\n\n._26_4cDsfGTzKAX8Wkg3OKV:hover {\n  background-color: #000;\n}\n", ""]);
+exports.push([module.i, "._1RE3uB4Guj7M0wpKWtgIgv {\n  position: relative;\n}\n.HYxnprmpyHB8-f0sUR8vz {\n  margin: 0;\n  overflow: hidden;\n  width: 100%;\n  display: flex;\n  justify-content: space-around;\n}\n\n.MhnDLXeMb4AmOQQfNDCsx {\n  display: flex;\n  width: 25%\n}\n\n._1SjL8WmHOgJqQrr3YNTOvA {\n  width: 100%;\n  height: 300px;\n  transform:  scale(1);\n  transition: transform 0.7s;\n}\n\n._1SjL8WmHOgJqQrr3YNTOvA:hover {\n  opacity: 0.9;\n  filter: brightness(90%);\n  transform: scale(1.03)\n}\n\n._1l1SEllJO9YAN3zkiK8JEa {\n  height: 350px;\n  width: 350px;\n}\n\n._26_4cDsfGTzKAX8Wkg3OKV {\n  padding: 8px;\n  font-size: 11px;\n  color: #ffffff;\n  background-color: #343434;\n  opacity: 0.7;\n  position: fixed;\n  right: 50px;\n  top: 130px;\n}\n\n._26_4cDsfGTzKAX8Wkg3OKV:hover {\n  background-color: #000;\n}\n", ""]);
 
 // Exports
 exports.locals = {
