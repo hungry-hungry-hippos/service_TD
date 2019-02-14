@@ -11,8 +11,8 @@ class Photos extends Component {
   }
 
   render() {
-    let { pending, photos } = this.props;
-    photos = photos.slice(0, 4);
+    const { pending, photos } = this.props;
+    const sortPhotos = photos.slice(0, 4);
     if (pending && !photos.length) {
       return (
         <div className="d-flex justify-content-center">
@@ -26,14 +26,17 @@ class Photos extends Component {
       );
     }
     return (
-      <div className={`${style.body} container-fluid`}>
-        {photos.map(link => (
-          <div className={`${style.photos} clearfix`} key={link.photoId}>
-            <div className={style.photo}>
-              <img src={link.photo_url} alt="" className={`img-fluid ${style.img}`} />
+      <div>
+        <div className={style.photodiv}>
+          {sortPhotos.map(link => (
+            <div className={style.photos} key={link.photoId}>
+              <div className={style.photo}>
+                <img src={link.photo_url} alt="" className={style.img} />
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
+        <button type="button" className={`btn btn-dark ${style.button}`}>{`${photos.length} PHOTOS ▷`}</button>
       </div>
     );
   }
