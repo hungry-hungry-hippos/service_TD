@@ -122,6 +122,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 var initialState = {
   pending: false,
+  name: '',
   photos: [],
   error: ''
 };
@@ -138,7 +139,8 @@ var requestPhotos = function requestPhotos() {
 
     case _action_actionTypes__WEBPACK_IMPORTED_MODULE_0__["REQUEST_PHOTOS_SUCCESS"]:
       return _objectSpread({}, state, {
-        photos: action.payload,
+        name: action.payload.name,
+        photos: action.payload.links,
         pending: false
       });
 
@@ -200,7 +202,7 @@ var requestPhotos = function requestPhotos() {
       }).then(function (data) {
         return dispatch({
           type: _actionTypes__WEBPACK_IMPORTED_MODULE_0__["REQUEST_PHOTOS_SUCCESS"],
-          payload: data.links
+          payload: data
         });
       }).catch(function (error) {
         return dispatch({

@@ -6,6 +6,7 @@ import {
 
 const initialState = {
   pending: false,
+  name: '',
   photos: [],
   error: '',
 };
@@ -20,7 +21,8 @@ const requestPhotos = (state = initialState, action) => {
     case REQUEST_PHOTOS_SUCCESS:
       return {
         ...state,
-        photos: action.payload,
+        name: action.payload.name,
+        photos: action.payload.links,
         pending: false,
       };
     case REQUEST_PHOTOS_FAILED:
