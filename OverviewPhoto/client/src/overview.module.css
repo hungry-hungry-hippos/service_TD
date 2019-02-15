@@ -61,23 +61,15 @@
   min-width: 100%;
   margin: 0;
   min-height: 100vh;
-  position: fixed;
-  overflow-y: auto;
 }
-
-/* .modalheader {
-  padding: 1rem;
-  border-bottom: 1px solid #343434;
-  position: fixed;
-  top: 2%;
-} */
 
 .modalcontent {
   background-color: #343434;
   color: #ffffff;
-  min-height: 100vh;
+  max-height: 100vh;
   pointer-events: auto;
-  overflow-y: auto
+  position: absolute;
+  overflow-y: auto;
 }
 
 .modalheader {
@@ -85,10 +77,10 @@
   color: #ffffff;
   display: block;
   padding: 1rem;
-  border-bottom: 1px solid #343434;
 }
 
 .closebutton {
+  background-color: transparent;
   position: fixed;
   right: 1%;
   top: 2%;
