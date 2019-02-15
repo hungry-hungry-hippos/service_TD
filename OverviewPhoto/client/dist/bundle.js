@@ -319,7 +319,7 @@ function (_Component) {
         className: _overview_module_css__WEBPACK_IMPORTED_MODULE_3___default.a.button,
         onClick: this.toggleModal.bind(this)
       }, "".concat(photos.length, " PHOTOS \u25B7")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "modal",
+        className: _overview_module_css__WEBPACK_IMPORTED_MODULE_3___default.a.modal,
         show: showModal.toString(),
         style: {
           display: "".concat(showModal ? 'block' : 'none')
@@ -328,17 +328,15 @@ function (_Component) {
         tabIndex: "-1",
         role: "dialog",
         onClick: this.toggleModal.bind(this),
-        "aria-labelledby": "ModalPhotosCenterTitle",
+        "aria-labelledby": "ModalPhotosTitle",
         "aria-hidden": "true"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "modal-dialog ".concat(_overview_module_css__WEBPACK_IMPORTED_MODULE_3___default.a.modalfull),
         role: "document"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: _overview_module_css__WEBPACK_IMPORTED_MODULE_3___default.a.modalcontent
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "modal-header row"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: _overview_module_css__WEBPACK_IMPORTED_MODULE_3___default.a.modalheader
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", {
-        className: "modal-title col-12 text-center"
+        className: "modal-title text-center"
       }, "RESTAURANT NAME"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         type: "button",
         className: "close ".concat(_overview_module_css__WEBPACK_IMPORTED_MODULE_3___default.a.closebutton),
@@ -346,18 +344,21 @@ function (_Component) {
         "aria-label": "Close"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
         "aria-hidden": "true",
-        className: "text-white col-1 mr-3"
+        className: "text-white mr-3"
       }, " \xD7 "))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "modal-body ".concat(_overview_module_css__WEBPACK_IMPORTED_MODULE_3___default.a.photodiv)
-      }, photos.length && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: _overview_module_css__WEBPACK_IMPORTED_MODULE_3___default.a.photos
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: _overview_module_css__WEBPACK_IMPORTED_MODULE_3___default.a.photo
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-        src: photos[0].photo_url,
-        alt: "",
-        className: _overview_module_css__WEBPACK_IMPORTED_MODULE_3___default.a.img
-      }))))))));
+        className: _overview_module_css__WEBPACK_IMPORTED_MODULE_3___default.a.modalcontent
+      }, photos.length && photos.map(function (link) {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: _overview_module_css__WEBPACK_IMPORTED_MODULE_3___default.a.photos,
+          key: link.photoId
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: _overview_module_css__WEBPACK_IMPORTED_MODULE_3___default.a.photo
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+          src: link.photo_url,
+          alt: "",
+          className: _overview_module_css__WEBPACK_IMPORTED_MODULE_3___default.a.img
+        })));
+      }))))));
     }
   }]);
 
@@ -681,7 +682,7 @@ function _objectWithoutPropertiesLoose(source, excluded) {
 
 exports = module.exports = __webpack_require__(/*! ../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js")(false);
 // Module
-exports.push([module.i, "._1RE3uB4Guj7M0wpKWtgIgv {\n  position: relative;\n}\n.HYxnprmpyHB8-f0sUR8vz {\n  margin: 0;\n  overflow: hidden;\n  width: 100%;\n  display: flex;\n  justify-content: space-around;\n}\n\n.MhnDLXeMb4AmOQQfNDCsx {\n  display: flex;\n  width: 25%\n}\n\n._1SjL8WmHOgJqQrr3YNTOvA {\n  width: 100%;\n  height: 300px;\n  transform:  scale(1);\n  transition: transform 0.7s;\n}\n\n._1SjL8WmHOgJqQrr3YNTOvA:hover {\n  opacity: 0.9;\n  filter: brightness(90%);\n  transform: scale(1.03)\n}\n\n._1l1SEllJO9YAN3zkiK8JEa {\n  height: 350px;\n  width: 350px;\n}\n\n._26_4cDsfGTzKAX8Wkg3OKV {\n  padding: 8px;\n  font-size: 11px;\n  color: #ffffff;\n  background-color: #343434;\n  opacity: 0.7;\n  position: fixed;\n  right: 50px;\n  top: 130px;\n}\n\n._26_4cDsfGTzKAX8Wkg3OKV:hover {\n  background-color: #000;\n}\n\n._3FcJm3SBl3fr8zP-3FjVD_ {\n  min-width: 100%;\n  margin: 0;\n  min-height: 100vh;\n}\n\n._1LUAULDpFW3wCw1b2L0HRB {\n  background-color: #343434;\n  color: #ffffff;\n  min-height: 100vh;\n  pointer-events: auto;\n}\n\n._1kh19h51LUiBQpOvq4eWgT {\n  align-items: center;\n  display: inline;\n  padding: 1rem;\n}\n\n._3SHuHEbqxTyrPdx4ycNN-f {\n  position: fixed;\n  right: 1%;\n  top: 2%;\n}", ""]);
+exports.push([module.i, "._1RE3uB4Guj7M0wpKWtgIgv {\n  position: relative;\n}\n.HYxnprmpyHB8-f0sUR8vz {\n  margin: 0;\n  overflow: hidden;\n  width: 100%;\n  display: flex;\n  justify-content: space-around;\n}\n\n.MhnDLXeMb4AmOQQfNDCsx {\n  display: inline-flex;\n  width: 25%\n}\n\n._1SjL8WmHOgJqQrr3YNTOvA {\n  width: 100%;\n  height: 300px;\n  transform:  scale(1);\n  transition: transform 0.7s;\n}\n\n._1SjL8WmHOgJqQrr3YNTOvA:hover {\n  opacity: 0.9;\n  filter: brightness(90%);\n  transform: scale(1.03)\n}\n\n._1l1SEllJO9YAN3zkiK8JEa {\n  height: 350px;\n  width: 350px;\n}\n\n._26_4cDsfGTzKAX8Wkg3OKV {\n  padding: 8px;\n  font-size: 11px;\n  color: #ffffff;\n  background-color: #343434;\n  opacity: 0.7;\n  position: fixed;\n  right: 50px;\n  top: 130px;\n}\n\n._26_4cDsfGTzKAX8Wkg3OKV:hover {\n  background-color: #000;\n}\n\n._2xLezBWKeAAS9ljQUjuL0z {\n  min-height: 100%;\n  left: 0;\n  position: fixed;\n  top: 0;\n  min-width: 100%;\n  display: flex;\n  flex-direction: column;\n}\n\n._3FcJm3SBl3fr8zP-3FjVD_ {\n  min-width: 100%;\n  margin: 0;\n  min-height: 100vh;\n  position: fixed;\n  overflow-y: auto;\n}\n\n/* .modalheader {\n  padding: 1rem;\n  border-bottom: 1px solid #343434;\n  position: fixed;\n  top: 2%;\n} */\n\n._1LUAULDpFW3wCw1b2L0HRB {\n  background-color: #343434;\n  color: #ffffff;\n  min-height: 100vh;\n  pointer-events: auto;\n  overflow-y: auto\n}\n\n._1kh19h51LUiBQpOvq4eWgT {\n  background-color: #343434;\n  color: #ffffff;\n  display: block;\n  padding: 1rem;\n  border-bottom: 1px solid #343434;\n}\n\n._3SHuHEbqxTyrPdx4ycNN-f {\n  position: fixed;\n  right: 1%;\n  top: 2%;\n}", ""]);
 
 // Exports
 exports.locals = {
@@ -691,6 +692,7 @@ exports.locals = {
 	"photo": "_1SjL8WmHOgJqQrr3YNTOvA",
 	"img": "_1l1SEllJO9YAN3zkiK8JEa",
 	"button": "_26_4cDsfGTzKAX8Wkg3OKV",
+	"modal": "_2xLezBWKeAAS9ljQUjuL0z",
 	"modalfull": "_3FcJm3SBl3fr8zP-3FjVD_",
 	"modalcontent": "_1LUAULDpFW3wCw1b2L0HRB",
 	"modalheader": "_1kh19h51LUiBQpOvq4eWgT",
