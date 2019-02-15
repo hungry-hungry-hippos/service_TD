@@ -48,7 +48,7 @@ class ModalPhotos extends Component {
             <div className={style.modalheader}>
               <h5 className="modal-title text-center">RESTAURANT NAME</h5>
               <button type="button" className={`close ${style.closebutton}`} data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true" className="text-white mr-3"> &times; </span>
+                <span aria-hidden="true" className="text-white"> &times; </span>
               </button>
             </div>
             <div className={style.modalcontent}>
@@ -56,7 +56,6 @@ class ModalPhotos extends Component {
                 {photos.length && photos.map(link => <Photo key={link.photoId} link={link} />)}
               </div>
             </div>
-
           </div>
         </div>
       </div>

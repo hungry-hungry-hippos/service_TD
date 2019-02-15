@@ -58,21 +58,15 @@
   flex-direction: column;
 }
 
-/* .modalfull {
-  min-width: 100%;
-  margin: 0;
-  min-height: 100vh;
-} */
-
 .modalcontent {
   background-color: #343434;
   color: #ffffff;
   min-height: 100vh;
-  max-height: 100vh;
+  max-height: 100%;
   pointer-events: auto;
   position: absolute;
   overflow-y: auto;
-  bottom: 0.5px ;
+  padding-bottom: 60px;
 }
 
 .modalheader {
@@ -82,9 +76,10 @@
   padding: 1rem;
 }
 
+
 .closebutton {
   background-color: transparent;
   position: fixed;
-  right: 1%;
+  right: 2%;
   top: 2%;
 }
