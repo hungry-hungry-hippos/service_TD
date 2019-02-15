@@ -4,6 +4,7 @@ import Proptypes from 'prop-types';
 import requestPhotos from '../action/actions';
 import style from '../overview.module.css';
 import ModalPhotos from './ModalPhotos';
+import Photo from './Photo';
 
 class Photos extends Component {
   componentDidMount() {
@@ -29,13 +30,7 @@ class Photos extends Component {
     return (
       <div>
         <div className={style.photodiv}>
-          {sortPhotos.map(link => (
-            <div className={style.photos} key={link.photoId}>
-              <div className={style.photo}>
-                <img src={link.photo_url} alt="" className={style.img} />
-              </div>
-            </div>
-          ))}
+          {sortPhotos.map(link => <Photo key={link.photoId} link={link} />)}
         </div>
         <ModalPhotos />
       </div>

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Proptypes from 'prop-types';
+import Photo from './Photo';
 import style from '../overview.module.css';
 
 
@@ -43,8 +44,7 @@ class ModalPhotos extends Component {
           aria-labelledby="ModalPhotosTitle"
           aria-hidden="true"
         >
-          <div className={style.modalfull} role="document">
-
+          <div role="document">
             <div className={style.modalheader}>
               <h5 className="modal-title text-center">RESTAURANT NAME</h5>
               <button type="button" className={`close ${style.closebutton}`} data-dismiss="modal" aria-label="Close">
@@ -53,16 +53,7 @@ class ModalPhotos extends Component {
             </div>
             <div className={style.modalcontent}>
               <div>
-                {photos.length
-                  && photos.map(link => (
-                    <div className={style.photos} key={link.photoId}>
-                      <div className={style.photo}>
-                        <img src={link.photo_url} alt="" className={style.img} />
-                      </div>
-                    </div>
-                  ))
-                }
-
+                {photos.length && photos.map(link => <Photo key={link.photoId} link={link} />)}
               </div>
             </div>
 
