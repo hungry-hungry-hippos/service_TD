@@ -438,7 +438,7 @@ function (_Component) {
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(ImageCarousel).call(this, props));
     _this.state = {
-      currentId: '1'
+      currentId: 1
     };
     return _this;
   }
@@ -446,18 +446,36 @@ function (_Component) {
   _createClass(ImageCarousel, [{
     key: "componentDidMount",
     value: function componentDidMount() {
-      document.getElementById("".concat(this.state.currentId)).classList.add('d-flex');
-      document.getElementById("".concat(this.state.currentId)).classList.remove('d-none');
+      document.getElementById("".concat(this.state.currentId.toString())).classList.add('d-flex');
+      document.getElementById("".concat(this.state.currentId.toString())).classList.remove('d-none');
     }
   }, {
     key: "onNext",
     value: function onNext() {
-      console.log('next');
+      var photos = this.props.photos;
+      var currentId = this.state.currentId;
+      var newId = currentId >= photos.length ? 1 : currentId + 1;
+      document.getElementById("".concat(newId.toString())).classList.add('d-flex');
+      document.getElementById("".concat(newId.toString())).classList.remove('d-none');
+      document.getElementById("".concat(currentId.toString())).classList.add('d-none');
+      document.getElementById("".concat(currentId.toString())).classList.remove('d-flex');
+      this.setState({
+        currentId: newId
+      });
     }
   }, {
     key: "onPrev",
     value: function onPrev() {
-      console.log('prev');
+      var photos = this.props.photos;
+      var currentId = this.state.currentId;
+      var newId = currentId <= 1 ? photos.length : currentId - 1;
+      document.getElementById("".concat(newId.toString())).classList.add('d-flex');
+      document.getElementById("".concat(newId.toString())).classList.remove('d-none');
+      document.getElementById("".concat(currentId.toString())).classList.add('d-none');
+      document.getElementById("".concat(currentId.toString())).classList.remove('d-flex');
+      this.setState({
+        currentId: newId
+      });
     }
   }, {
     key: "render",

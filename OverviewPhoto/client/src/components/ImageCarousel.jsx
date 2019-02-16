@@ -6,21 +6,35 @@ class ImageCarousel extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      currentId: '1',
-    }
+      currentId: 1,
+    };
   }
 
   componentDidMount() {
-    document.getElementById(`${this.state.currentId}`).classList.add('d-flex');
-    document.getElementById(`${this.state.currentId}`).classList.remove('d-none');
+    document.getElementById(`${this.state.currentId.toString()}`).classList.add('d-flex');
+    document.getElementById(`${this.state.currentId.toString()}`).classList.remove('d-none');
   }
 
   onNext() {
-    console.log('next')
+    const { photos } = this.props;
+    const { currentId } = this.state;
+    const newId = currentId >= photos.length ? 1 : currentId + 1;
+    document.getElementById(`${newId.toString()}`).classList.add('d-flex');
+    document.getElementById(`${newId.toString()}`).classList.remove('d-none');
+    document.getElementById(`${currentId.toString()}`).classList.add('d-none');
+    document.getElementById(`${currentId.toString()}`).classList.remove('d-flex');
+    this.setState({ currentId: newId });
   }
-  
+
   onPrev() {
-    console.log('prev')
+    const { photos } = this.props;
+    const { currentId } = this.state;
+    const newId = currentId <= 1 ? photos.length : currentId - 1;
+    document.getElementById(`${newId.toString()}`).classList.add('d-flex');
+    document.getElementById(`${newId.toString()}`).classList.remove('d-none');
+    document.getElementById(`${currentId.toString()}`).classList.add('d-none');
+    document.getElementById(`${currentId.toString()}`).classList.remove('d-flex');
+    this.setState({ currentId: newId });
   }
 
   render() {
