@@ -47,7 +47,7 @@ class ModalPhotos extends Component {
           <div role="document">
             <div className={style.modalheader}>
               {name && <h5 className="modal-title text-center">{name.toUpperCase()}</h5>}
-              <button type="button" className={`close ${style.closebutton}`} data-dismiss="modal" aria-label="Close">
+              <button type="button" className={style.closebutton} data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true" className="text-white"> &times; </span>
               </button>
             </div>
