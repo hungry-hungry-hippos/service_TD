@@ -10,6 +10,7 @@ const initialState = {
   name: '',
   photos: [],
   error: '',
+  currentStoreId: null,
   openCarouselModal: false,
 };
 
@@ -36,6 +37,7 @@ const requestPhotos = (state = initialState, action) => {
     case OPEN_CAROUSEL_MODAL:
       return {
         ...state,
+        currentStoreId: action.payload,
         openCarouselModal: !state.openCarouselModal,
       };
     default:

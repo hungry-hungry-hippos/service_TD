@@ -5,9 +5,10 @@ import { displayCarouselModal } from '../action/actions';
 import style from '../overview.module.css';
 
 class Photo extends Component {
-  onClick() {
+  onClick(e) {
+    const clickedId = Number(e.target.id);
     const { onModalRequest } = this.props;
-    onModalRequest();
+    onModalRequest(clickedId);
   }
 
   render() {
@@ -15,7 +16,7 @@ class Photo extends Component {
     return (
       <div className={style.photos} key={link.photoId}>
         <div className={style.photo}>
-          <img src={link.photo_url} alt="" className={style.img} onClick={this.onClick.bind(this)} />
+          <img src={link.photo_url} alt="" className={style.img} id={link.photoId} onClick={this.onClick.bind(this)} />
         </div>
       </div>
     );
@@ -24,7 +25,7 @@ class Photo extends Component {
 
 const mapDispatchToProps = dispatch => (
   {
-    onModalRequest: () => dispatch(displayCarouselModal()),
+    onModalRequest: id => dispatch(displayCarouselModal(id)),
   }
 );
 

@@ -42,7 +42,7 @@ class CarouselModal extends Component {
                     <span aria-hidden="true" className="text-white"> &times; </span>
                   </button>
                 </div>
-                <div className={style.modalcontent}>
+                <div className={`${style.modalcontent} ${style.carouselmodal}`}>
                   <ImageCarousel />
                 </div>
               </div>

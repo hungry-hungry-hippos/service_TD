@@ -16,6 +16,8 @@ const requestPhotos = () => (dispatch) => {
   }
 };
 
-export const displayCarouselModal = () => dispatch => dispatch({ type: OPEN_CAROUSEL_MODAL });
+export const displayCarouselModal = id => dispatch => dispatch(
+  { type: OPEN_CAROUSEL_MODAL, payload: id },
+);
 
 export default requestPhotos;

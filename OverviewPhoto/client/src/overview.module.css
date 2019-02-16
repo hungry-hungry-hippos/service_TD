@@ -33,6 +33,12 @@
   width: 100%;
 }
 
+.carouselimg {
+  height: 80vh;
+  background: rgba(0, 0, 0, 1);
+  display: block;
+}
+
 .button {
   padding: 8px;
   font-size: 11px;
@@ -59,7 +65,7 @@
 }
 
 .modalcontent {
-  background-color: #343434;
+  background: rgba(34, 34, 34, 0.95);
   color: #ffffff;
   width: 100%;
   min-height: 100vh;
@@ -68,6 +74,11 @@
   position: absolute;
   overflow-y: auto;
   padding-bottom: 5rem;
+}
+
+.carouselmodal {
+  opacity: 1;
+  background: rgba(34, 34, 34, 0.9);
 }
 
 .modalheader {
@@ -82,7 +93,7 @@
   background-color: transparent;
   position: fixed;
   right: 2%;
-  top: 2%;
+  top: 3%;
   -webkit-appearance: none;
   font-size: 1.5rem;
   font-weight: 700;
@@ -97,3 +108,28 @@
   opacity: 1;
   transform: scale(1.03)
 }
+
+.slideshowView {
+  background-color: transparent;
+  position: fixed;
+  right: 4%;
+  top: 3%;
+  display: inline-block;
+  -webkit-appearance: none;
+  font-size: 1rem;
+  opacity: 0.7;
+  border-right: 1px solid #ffffff;
+  padding: 2px;
+  margin-right: 5px;
+}
+
+.modalicon {
+  margin-left: 5px;
+  margin-right: 10px;
+}
+
+/* .modalicon:hover {
+  cursor: pointer;
+  opacity: 1;
+} */
+
