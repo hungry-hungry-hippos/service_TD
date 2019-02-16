@@ -19,7 +19,7 @@ class ModalPhotos extends Component {
   }
 
   render() {
-    const { photos } = this.props;
+    const { photos, name } = this.props;
     const { showModal } = this.state;
     return (
       <div>
@@ -46,15 +46,13 @@ class ModalPhotos extends Component {
         >
           <div role="document">
             <div className={style.modalheader}>
-              <h5 className="modal-title text-center">RESTAURANT NAME</h5>
+              {name && <h5 className="modal-title text-center">{name.toUpperCase()}</h5>}
               <button type="button" className={`close ${style.closebutton}`} data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true" className="text-white"> &times; </span>
               </button>
             </div>
             <div className={style.modalcontent}>
-              <div>
-                {photos.length && photos.map(link => <Photo key={link.photoId} link={link} />)}
-              </div>
+              {photos.length && photos.map(link => <Photo key={link.photoId} link={link} />)}
             </div>
           </div>
         </div>
@@ -65,10 +63,14 @@ class ModalPhotos extends Component {
   }
 }
 const mapStateToProps = state => (
-  { photos: state.photos.photos }
+  {
+    name: state.photos.name,
+    photos: state.photos.photos,
+  }
 );
 
 ModalPhotos.propTypes = {
+  name: Proptypes.string.isRequired,
   photos: Proptypes.instanceOf(Array).isRequired,
 };
 

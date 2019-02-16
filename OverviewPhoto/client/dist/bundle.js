@@ -316,7 +316,9 @@ function (_Component) {
   }, {
     key: "render",
     value: function render() {
-      var photos = this.props.photos;
+      var _this$props = this.props,
+          photos = _this$props.photos,
+          name = _this$props.name;
       var showModal = this.state.showModal;
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, !showModal && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         type: "button",
@@ -338,9 +340,9 @@ function (_Component) {
         role: "document"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: _overview_module_css__WEBPACK_IMPORTED_MODULE_4___default.a.modalheader
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", {
+      }, name && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", {
         className: "modal-title text-center"
-      }, "RESTAURANT NAME"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+      }, name.toUpperCase()), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         type: "button",
         className: "close ".concat(_overview_module_css__WEBPACK_IMPORTED_MODULE_4___default.a.closebutton),
         "data-dismiss": "modal",
@@ -350,12 +352,12 @@ function (_Component) {
         className: "text-white"
       }, " \xD7 "))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: _overview_module_css__WEBPACK_IMPORTED_MODULE_4___default.a.modalcontent
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, photos.length && photos.map(function (link) {
+      }, photos.length && photos.map(function (link) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Photo__WEBPACK_IMPORTED_MODULE_3__["default"], {
           key: link.photoId,
           link: link
         });
-      }))))));
+      })))));
     }
   }]);
 
@@ -364,11 +366,13 @@ function (_Component) {
 
 var mapStateToProps = function mapStateToProps(state) {
   return {
+    name: state.photos.name,
     photos: state.photos.photos
   };
 };
 
 ModalPhotos.propTypes = {
+  name: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.string.isRequired,
   photos: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.instanceOf(Array).isRequired
 };
 /* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapStateToProps)(ModalPhotos));
@@ -390,64 +394,24 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _overview_module_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../overview.module.css */ "./client/src/overview.module.css");
 /* harmony import */ var _overview_module_css__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_overview_module_css__WEBPACK_IMPORTED_MODULE_2__);
-function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+ // import { connect } from 'react-redux';
 
 
 
 
-
-var Photo =
-/*#__PURE__*/
-function (_Component) {
-  _inherits(Photo, _Component);
-
-  function Photo() {
-    _classCallCheck(this, Photo);
-
-    return _possibleConstructorReturn(this, _getPrototypeOf(Photo).apply(this, arguments));
-  }
-
-  _createClass(Photo, [{
-    key: "onClick",
-    value: function onClick() {
-      console.log('click');
-    }
-  }, {
-    key: "render",
-    value: function render() {
-      var link = this.props.link;
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: _overview_module_css__WEBPACK_IMPORTED_MODULE_2___default.a.photos,
-        key: link.photoId
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: _overview_module_css__WEBPACK_IMPORTED_MODULE_2___default.a.photo
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-        src: link.photo_url,
-        alt: "",
-        className: "".concat(_overview_module_css__WEBPACK_IMPORTED_MODULE_2___default.a.img, " img-fluid"),
-        onClick: this.onClick.bind(this)
-      })));
-    }
-  }]);
-
-  return Photo;
-}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
+var Photo = function Photo(_ref) {
+  var link = _ref.link;
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: _overview_module_css__WEBPACK_IMPORTED_MODULE_2___default.a.photos,
+    key: link.photoId
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: _overview_module_css__WEBPACK_IMPORTED_MODULE_2___default.a.photo
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+    src: link.photo_url,
+    alt: "",
+    className: _overview_module_css__WEBPACK_IMPORTED_MODULE_2___default.a.img
+  })));
+};
 
 Photo.propTypes = {
   link: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.shape({

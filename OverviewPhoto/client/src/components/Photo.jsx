@@ -1,23 +1,16 @@
 import React, { Component } from 'react';
+// import { connect } from 'react-redux';
 import Proptypes from 'prop-types';
 import style from '../overview.module.css';
 
-class Photo extends Component {
-  onClick() {
-    console.log('click')
-  }
+const Photo = ({ link }) => (
+  <div className={style.photos} key={link.photoId}>
+    <div className={style.photo}>
+      <img src={link.photo_url} alt="" className={style.img} />
+    </div>
+  </div>
+);
 
-  render() {
-    const { link } = this.props;
-    return (
-      <div className={style.photos} key={link.photoId}>
-        <div className={style.photo}>
-          <img src={link.photo_url} alt="" className={`${style.img} img-fluid`} onClick={this.onClick.bind(this)}/>
-        </div>
-      </div>
-    );
-  }
-}
 
 Photo.propTypes = {
   link: Proptypes.shape({
