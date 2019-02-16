@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Proptypes from 'prop-types';
 import { displayCarouselModal } from '../action/actions';
+import ImageCarousel from './ImageCarousel';
 import style from '../overview.module.css';
 
 class CarouselModal extends Component {
@@ -11,7 +12,7 @@ class CarouselModal extends Component {
   }
 
   render() {
-    const { openCarouselModal, photos, name } = this.props;
+    const { openCarouselModal, name } = this.props;
     return (
       <div>
         {openCarouselModal
@@ -42,7 +43,7 @@ class CarouselModal extends Component {
                   </button>
                 </div>
                 <div className={style.modalcontent}>
-                  <img src={photos[0].photo_url} alt="" style={{ height: '50%', width: '70%' }} />
+                  <ImageCarousel />
                 </div>
               </div>
             </div>
@@ -56,7 +57,6 @@ class CarouselModal extends Component {
 const mapStateToProps = state => (
   {
     name: state.photos.name,
-    photos: state.photos.photos,
     openCarouselModal: state.photos.openCarouselModal,
   }
 );
@@ -69,7 +69,6 @@ const mapDispatchToProps = dispatch => (
 
 CarouselModal.propTypes = {
   name: Proptypes.string.isRequired,
-  photos: Proptypes.instanceOf(Array).isRequired,
   openCarouselModal: Proptypes.bool.isRequired,
   onModalRequest: Proptypes.func.isRequired,
 };
