@@ -2,6 +2,7 @@ import {
   REQUEST_PHOTOS_PENDING,
   REQUEST_PHOTOS_SUCCESS,
   REQUEST_PHOTOS_FAILED,
+  OPEN_CAROUSEL_MODAL,
 } from './actionTypes';
 
 const requestPhotos = () => (dispatch) => {
@@ -14,5 +15,7 @@ const requestPhotos = () => (dispatch) => {
       .catch(error => dispatch({ type: REQUEST_PHOTOS_FAILED, payload: error }));
   }
 };
+
+export const displayCarouselModal = () => dispatch => dispatch({ type: OPEN_CAROUSEL_MODAL });
 
 export default requestPhotos;

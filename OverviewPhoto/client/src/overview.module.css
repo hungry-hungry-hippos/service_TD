@@ -61,6 +61,7 @@
 .modalcontent {
   background-color: #343434;
   color: #ffffff;
+  width: 100%;
   min-height: 100vh;
   max-height: 100%;
   pointer-events: auto;

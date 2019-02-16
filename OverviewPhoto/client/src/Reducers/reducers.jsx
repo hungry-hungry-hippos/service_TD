@@ -2,6 +2,7 @@ import {
   REQUEST_PHOTOS_PENDING,
   REQUEST_PHOTOS_SUCCESS,
   REQUEST_PHOTOS_FAILED,
+  OPEN_CAROUSEL_MODAL,
 } from '../action/actionTypes';
 
 const initialState = {
@@ -9,6 +10,7 @@ const initialState = {
   name: '',
   photos: [],
   error: '',
+  openCarouselModal: false,
 };
 
 const requestPhotos = (state = initialState, action) => {
@@ -30,6 +32,11 @@ const requestPhotos = (state = initialState, action) => {
         ...state,
         error: action.payload,
         pending: false,
+      };
+    case OPEN_CAROUSEL_MODAL:
+      return {
+        ...state,
+        openCarouselModal: !state.openCarouselModal,
       };
     default:
       return state;
