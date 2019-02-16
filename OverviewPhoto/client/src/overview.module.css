@@ -67,14 +67,14 @@
   pointer-events: auto;
   position: absolute;
   overflow-y: auto;
-  padding-bottom: 60px;
+  padding-bottom: 5rem;
 }
 
 .modalheader {
   background-color: #343434;
   color: #ffffff;
   display: block;
-  padding: 1rem;
+  padding: 1.5rem;
 }
 
 

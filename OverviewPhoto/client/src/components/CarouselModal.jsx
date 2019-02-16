@@ -31,7 +31,7 @@ class CarouselModal extends Component {
             >
               <div role="document">
                 <div className={style.modalheader}>
-                  {name && <h5 className="modal-title text-left">{name.toUpperCase()}</h5>}
+                  {name && <h5 className="modal-title text-center">{name.toUpperCase()}</h5>}
                   <button
                     type="button"
                     className={style.closebutton}

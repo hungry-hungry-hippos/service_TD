@@ -347,7 +347,7 @@ function (_Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: _overview_module_css__WEBPACK_IMPORTED_MODULE_5___default.a.modalheader
       }, name && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", {
-        className: "modal-title text-left"
+        className: "modal-title text-center"
       }, name.toUpperCase()), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         type: "button",
         className: _overview_module_css__WEBPACK_IMPORTED_MODULE_5___default.a.closebutton,
@@ -438,11 +438,56 @@ function (_Component) {
   }
 
   _createClass(ImageCarousel, [{
+    key: "onClick",
+    value: function onClick() {
+      console.log('hi');
+    }
+  }, {
     key: "render",
     value: function render() {
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", {
-        className: "text-white"
-      }, "HELLO WORLD"));
+      var photos = this.props.photos;
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        id: "imageCarousel",
+        className: "carousel slide",
+        "data-ride": "carousel"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "carousel-inner"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "carousel-item active d-flex align-items-center justify-content-center"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+        src: photos[11].photo_url,
+        alt: "",
+        className: "d-block",
+        style: {
+          height: "80vh"
+        }
+      })), console.log(photos), photos.slice(1).map(function (photo) {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "carousel-item",
+          key: photo.photoId
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+          src: photo.photo_url,
+          id: photo.photoId,
+          alt: "",
+          className: "d-block w-100"
+        }));
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+        className: "carousel-control-prev",
+        href: "#imageCarousel",
+        role: "button",
+        "data-slide": "prev"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        className: "carousel-control-prev-icon",
+        "aria-hidden": "true"
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+        className: "carousel-control-next",
+        href: "#imageCarousel",
+        role: "button",
+        dataslide: "next"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        className: "carousel-control-next-icon",
+        "aria-hidden": "true"
+      })));
     }
   }]);
 
@@ -992,7 +1037,7 @@ function _objectWithoutPropertiesLoose(source, excluded) {
 
 exports = module.exports = __webpack_require__(/*! ../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js")(false);
 // Module
-exports.push([module.i, "._1RE3uB4Guj7M0wpKWtgIgv {\n  position: relative;\n}\n.HYxnprmpyHB8-f0sUR8vz {\n  margin: 0;\n  overflow: hidden;\n  width: 100%;\n  display: flex;\n  justify-content: space-around;\n}\n\n.MhnDLXeMb4AmOQQfNDCsx {\n  display: inline-flex;\n  width: 25%;\n}\n/* @media width 50% for small screen */\n\n._1SjL8WmHOgJqQrr3YNTOvA {\n  max-width: 100%;\n  height: 300px;\n  transform:  scale(0.97);\n  transition: transform 0.8s;\n}\n\n._1SjL8WmHOgJqQrr3YNTOvA:hover {\n  opacity: 0.9;\n  filter: brightness(90%);\n  transform: scale(1)\n}\n\n._1l1SEllJO9YAN3zkiK8JEa {\n  height: 100%;\n  width: 100%;\n}\n\n._26_4cDsfGTzKAX8Wkg3OKV {\n  padding: 8px;\n  font-size: 11px;\n  color: #ffffff;\n  background-color: #343434;\n  opacity: 0.7;\n  position: fixed;\n  right: 50px;\n  top: 130px;\n}\n\n._26_4cDsfGTzKAX8Wkg3OKV:hover {\n  background-color: #000;\n}\n\n._2xLezBWKeAAS9ljQUjuL0z {\n  min-height: 100%;\n  left: 0;\n  position: fixed;\n  top: 0;\n  min-width: 100%;\n  display: flex;\n  flex-direction: column;\n}\n\n._1LUAULDpFW3wCw1b2L0HRB {\n  background-color: #343434;\n  color: #ffffff;\n  width: 100%;\n  min-height: 100vh;\n  max-height: 100%;\n  pointer-events: auto;\n  position: absolute;\n  overflow-y: auto;\n  padding-bottom: 60px;\n}\n\n._1kh19h51LUiBQpOvq4eWgT {\n  background-color: #343434;\n  color: #ffffff;\n  display: block;\n  padding: 1rem;\n}\n\n\n._3SHuHEbqxTyrPdx4ycNN-f {\n  background-color: transparent;\n  position: fixed;\n  right: 2%;\n  top: 2%;\n  -webkit-appearance: none;\n  font-size: 1.5rem;\n  font-weight: 700;\n  line-height: 1;\n  opacity: 0.7;\n  border: none;\n  transform: scale(0.98);\n  transition: opacity 0.8s transform 0.8s ;\n}\n._3SHuHEbqxTyrPdx4ycNN-f:hover {\n  cursor: pointer;\n  opacity: 1;\n  transform: scale(1.03)\n}\n", ""]);
+exports.push([module.i, "._1RE3uB4Guj7M0wpKWtgIgv {\n  position: relative;\n}\n.HYxnprmpyHB8-f0sUR8vz {\n  margin: 0;\n  overflow: hidden;\n  width: 100%;\n  display: flex;\n  justify-content: space-around;\n}\n\n.MhnDLXeMb4AmOQQfNDCsx {\n  display: inline-flex;\n  width: 25%;\n}\n/* @media width 50% for small screen */\n\n._1SjL8WmHOgJqQrr3YNTOvA {\n  max-width: 100%;\n  height: 300px;\n  transform:  scale(0.97);\n  transition: transform 0.8s;\n}\n\n._1SjL8WmHOgJqQrr3YNTOvA:hover {\n  opacity: 0.9;\n  filter: brightness(90%);\n  transform: scale(1)\n}\n\n._1l1SEllJO9YAN3zkiK8JEa {\n  height: 100%;\n  width: 100%;\n}\n\n._26_4cDsfGTzKAX8Wkg3OKV {\n  padding: 8px;\n  font-size: 11px;\n  color: #ffffff;\n  background-color: #343434;\n  opacity: 0.7;\n  position: fixed;\n  right: 50px;\n  top: 130px;\n}\n\n._26_4cDsfGTzKAX8Wkg3OKV:hover {\n  background-color: #000;\n}\n\n._2xLezBWKeAAS9ljQUjuL0z {\n  min-height: 100%;\n  left: 0;\n  position: fixed;\n  top: 0;\n  min-width: 100%;\n  display: flex;\n  flex-direction: column;\n}\n\n._1LUAULDpFW3wCw1b2L0HRB {\n  background-color: #343434;\n  color: #ffffff;\n  width: 100%;\n  min-height: 100vh;\n  max-height: 100%;\n  pointer-events: auto;\n  position: absolute;\n  overflow-y: auto;\n  padding-bottom: 5rem;\n}\n\n._1kh19h51LUiBQpOvq4eWgT {\n  background-color: #343434;\n  color: #ffffff;\n  display: block;\n  padding: 1.5rem;\n}\n\n\n._3SHuHEbqxTyrPdx4ycNN-f {\n  background-color: transparent;\n  position: fixed;\n  right: 2%;\n  top: 2%;\n  -webkit-appearance: none;\n  font-size: 1.5rem;\n  font-weight: 700;\n  line-height: 1;\n  opacity: 0.7;\n  border: none;\n  transform: scale(0.98);\n  transition: opacity 0.8s transform 0.8s ;\n}\n._3SHuHEbqxTyrPdx4ycNN-f:hover {\n  cursor: pointer;\n  opacity: 1;\n  transform: scale(1.03)\n}\n", ""]);
 
 // Exports
 exports.locals = {
