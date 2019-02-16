@@ -431,16 +431,33 @@ var ImageCarousel =
 function (_Component) {
   _inherits(ImageCarousel, _Component);
 
-  function ImageCarousel() {
+  function ImageCarousel(props) {
+    var _this;
+
     _classCallCheck(this, ImageCarousel);
 
-    return _possibleConstructorReturn(this, _getPrototypeOf(ImageCarousel).apply(this, arguments));
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(ImageCarousel).call(this, props));
+    _this.state = {
+      currentId: '1'
+    };
+    return _this;
   }
 
   _createClass(ImageCarousel, [{
-    key: "onClick",
-    value: function onClick() {
-      console.log('hi');
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      document.getElementById("".concat(this.state.currentId)).classList.add('d-flex');
+      document.getElementById("".concat(this.state.currentId)).classList.remove('d-none');
+    }
+  }, {
+    key: "onNext",
+    value: function onNext() {
+      console.log('next');
+    }
+  }, {
+    key: "onPrev",
+    value: function onPrev() {
+      console.log('prev');
     }
   }, {
     key: "render",
@@ -448,45 +465,34 @@ function (_Component) {
       var photos = this.props.photos;
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         id: "imageCarousel",
-        className: "carousel slide",
-        "data-ride": "carousel"
+        className: "carousel slide"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "carousel-inner"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "carousel-item active d-flex align-items-center justify-content-center"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-        src: photos[11].photo_url,
-        alt: "",
-        className: "d-block",
-        style: {
-          height: "80vh"
-        }
-      })), console.log(photos), photos.slice(1).map(function (photo) {
+      }, photos.map(function (photo) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "carousel-item",
-          key: photo.photoId
+          className: "carousel-item d-none align-items-center justify-content-center",
+          key: photo.photoId,
+          id: photo.photoId
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
           src: photo.photo_url,
-          id: photo.photoId,
           alt: "",
-          className: "d-block w-100"
+          className: "d-block",
+          style: {
+            height: '80vh'
+          }
         }));
-      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-        className: "carousel-control-prev",
-        href: "#imageCarousel",
-        role: "button",
-        "data-slide": "prev"
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "carousel-control-prev"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
         className: "carousel-control-prev-icon",
-        "aria-hidden": "true"
-      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-        className: "carousel-control-next",
-        href: "#imageCarousel",
-        role: "button",
-        dataslide: "next"
+        "aria-hidden": "true",
+        onClick: this.onPrev.bind(this)
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "carousel-control-next"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
         className: "carousel-control-next-icon",
-        "aria-hidden": "true"
+        "aria-hidden": "true",
+        onClick: this.onNext.bind(this)
       })));
     }
   }]);
