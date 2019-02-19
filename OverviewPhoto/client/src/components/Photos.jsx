@@ -1,14 +1,19 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Proptypes from 'prop-types';
-import requestPhotos from '../action/actions';
+import requestPhotos, { displayPhotoModal } from '../action/actions';
 import style from '../overview.module.css';
-import ModalPhotos from './ModalPhotos';
+import Photo from './Photo';
 
 class Photos extends Component {
   componentDidMount() {
     const { onRequestPhotos } = this.props;
     onRequestPhotos();
+  }
+
+  togglePhotoModal() {
+    const { onPhotoModalRequest } = this.props;
+    onPhotoModalRequest();
   }
 
   render() {
@@ -29,15 +34,11 @@ class Photos extends Component {
     return (
       <div>
         <div className={style.photodiv}>
-          {sortPhotos.map(link => (
-            <div className={style.photos} key={link.photoId}>
-              <div className={style.photo}>
-                <img src={link.photo_url} alt="" className={style.img} />
-              </div>
-            </div>
-          ))}
+          {sortPhotos.map(link => <Photo key={link.photoId} link={link} />)}
         </div>
-        <ModalPhotos />
+        <button type="button" className={style.button} onClick={this.togglePhotoModal.bind(this)}>
+          {`${photos.length} PHOTOS ▷`}
+        </button>
       </div>
     );
   }
@@ -53,6 +54,7 @@ const mapStateToProps = state => (
 const mapDispatchToProps = dispatch => (
   {
     onRequestPhotos: () => dispatch(requestPhotos()),
+    onPhotoModalRequest: () => dispatch(displayPhotoModal()),
   }
 );
 
@@ -60,6 +62,7 @@ Photos.propTypes = {
   photos: Proptypes.instanceOf(Array).isRequired,
   pending: Proptypes.bool.isRequired,
   onRequestPhotos: Proptypes.func.isRequired,
+  onPhotoModalRequest: Proptypes.func.isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Photos);

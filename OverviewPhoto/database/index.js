@@ -10,6 +10,7 @@ mongoose.connect('mongodb://localhost/photos', (err) => {
 
 const photoSchema = mongoose.Schema({
   id: { type: Number, unique: true },
+  name: String,
   links: [
     {
       photoId: Number,
@@ -29,7 +30,7 @@ const allLinks = [
   'https://zagat-photos.imgix.net/ChIJa52AEWaHhYARNkV1i0pn-S4/06bc8870d87a6058cbdfc8d56252c3f2.jpg',
   'https://zagat-photos.imgix.net/ChIJa52AEWaHhYARNkV1i0pn-S4/f813c0e2f3ac447924b278217fb132d9.jpg',
   'https://zagat-photos.imgix.net/ChIJa52AEWaHhYARNkV1i0pn-S4/aea7328453a4ff5c19950b3eead347f5.jpg',
-  'https://zagat-photos.imgix.net/ChIJa52AEWaHhYARNkV1i0pn-S4/72198efa97bc89148f9339e5d46e668b.jpg',
+  'https://zagat-photos.imgix.net/ChIJa52AEWaHhYARNkV1i0pn-S4/cef7427c268db53e54b03ddabb627a0c.jpg',
   'https://zagat-photos.imgix.net/ChIJa52AEWaHhYARNkV1i0pn-S4/cd650589494bd8aa92a86ac366e072cd.jpg',
   'https://zagat-photos.imgix.net/ChIJa52AEWaHhYARNkV1i0pn-S4/eb3fee290f683f9645be83df2cd18c74.jpg',
   'https://zagat-photos.imgix.net/ChIJa52AEWaHhYARNkV1i0pn-S4/a5fd69e410e0e616750f405edb50e583.jpg',
@@ -47,6 +48,7 @@ const saveMainOne = () => {
   }
   const MainPhoto = new Photo({
     id: 1,
+    name: 'Izakaya Sozai',
     links,
   });
   MainPhoto.save((err) => {
@@ -73,6 +75,7 @@ const saveFakeData = () => {
     }
     const newPhoto = new Photo({
       id,
+      name: `Fake Data ${id}`,
       links,
     });
     allPromises.push(newPhoto.save());
