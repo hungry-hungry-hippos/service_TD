@@ -122,12 +122,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 var initialState = {
   pending: false,
-  name: '',
   photos: [],
-  error: '',
-  currentStoreId: null,
-  openPhotoModal: false,
-  openCarouselModal: false
+  error: ''
 };
 
 var requestPhotos = function requestPhotos() {
@@ -142,8 +138,7 @@ var requestPhotos = function requestPhotos() {
 
     case _action_actionTypes__WEBPACK_IMPORTED_MODULE_0__["REQUEST_PHOTOS_SUCCESS"]:
       return _objectSpread({}, state, {
-        name: action.payload.name,
-        photos: action.payload.links,
+        photos: action.payload,
         pending: false
       });
 
@@ -153,23 +148,12 @@ var requestPhotos = function requestPhotos() {
         pending: false
       });
 
-    case _action_actionTypes__WEBPACK_IMPORTED_MODULE_0__["TOGGLE_PHOTO_MODAL"]:
-      return _objectSpread({}, state, {
-        openPhotoModal: !state.openPhotoModal
-      });
-
-    case _action_actionTypes__WEBPACK_IMPORTED_MODULE_0__["TOGGLE_CAROUSEL_MODAL"]:
-      return _objectSpread({}, state, {
-        currentStoreId: action.payload,
-        openCarouselModal: !state.openCarouselModal
-      });
-
     default:
       return state;
   }
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (requestPhotos); // could have separate into 2 reducers
+/* harmony default export */ __webpack_exports__["default"] = (requestPhotos);
 
 /***/ }),
 
@@ -177,7 +161,7 @@ var requestPhotos = function requestPhotos() {
 /*!*******************************************!*\
   !*** ./client/src/action/actionTypes.jsx ***!
   \*******************************************/
-/*! exports provided: REQUEST_PHOTOS_PENDING, REQUEST_PHOTOS_SUCCESS, REQUEST_PHOTOS_FAILED, TOGGLE_PHOTO_MODAL, TOGGLE_CAROUSEL_MODAL */
+/*! exports provided: REQUEST_PHOTOS_PENDING, REQUEST_PHOTOS_SUCCESS, REQUEST_PHOTOS_FAILED */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -185,13 +169,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "REQUEST_PHOTOS_PENDING", function() { return REQUEST_PHOTOS_PENDING; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "REQUEST_PHOTOS_SUCCESS", function() { return REQUEST_PHOTOS_SUCCESS; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "REQUEST_PHOTOS_FAILED", function() { return REQUEST_PHOTOS_FAILED; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TOGGLE_PHOTO_MODAL", function() { return TOGGLE_PHOTO_MODAL; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TOGGLE_CAROUSEL_MODAL", function() { return TOGGLE_CAROUSEL_MODAL; });
 var REQUEST_PHOTOS_PENDING = 'REQUEST_PHOTOS_PENDING';
 var REQUEST_PHOTOS_SUCCESS = 'REQUEST_PHOTOS_SUCCESS';
 var REQUEST_PHOTOS_FAILED = 'REQUEST_PHOTOS_FAILED';
-var TOGGLE_PHOTO_MODAL = 'TOGGLE_PHOTO_MODAL';
-var TOGGLE_CAROUSEL_MODAL = 'TOGGLE_CAROUSEL_MODAL';
 
 /***/ }),
 
@@ -199,13 +179,11 @@ var TOGGLE_CAROUSEL_MODAL = 'TOGGLE_CAROUSEL_MODAL';
 /*!***************************************!*\
   !*** ./client/src/action/actions.jsx ***!
   \***************************************/
-/*! exports provided: displayCarouselModal, displayPhotoModal, default */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "displayCarouselModal", function() { return displayCarouselModal; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "displayPhotoModal", function() { return displayPhotoModal; });
 /* harmony import */ var _actionTypes__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./actionTypes */ "./client/src/action/actionTypes.jsx");
 
 
@@ -214,41 +192,22 @@ var requestPhotos = function requestPhotos() {
     dispatch({
       type: _actionTypes__WEBPACK_IMPORTED_MODULE_0__["REQUEST_PHOTOS_PENDING"]
     });
-    var id = parseInt(window.location.pathname.slice(1), 10);
-
-    if (!Number.isNaN(id)) {
-      fetch("http://localhost:3020/api/".concat(id)).then(function (response) {
-        return response.json();
-      }).then(function (data) {
-        return dispatch({
-          type: _actionTypes__WEBPACK_IMPORTED_MODULE_0__["REQUEST_PHOTOS_SUCCESS"],
-          payload: data
-        });
-      }).catch(function (error) {
-        return dispatch({
-          type: _actionTypes__WEBPACK_IMPORTED_MODULE_0__["REQUEST_PHOTOS_FAILED"],
-          payload: error
-        });
+    fetch('http://localhost:3020/1').then(function (response) {
+      return response.json();
+    }).then(function (data) {
+      return dispatch({
+        type: _actionTypes__WEBPACK_IMPORTED_MODULE_0__["REQUEST_PHOTOS_SUCCESS"],
+        payload: data.links
       });
-    }
+    }).catch(function (error) {
+      return dispatch({
+        type: _actionTypes__WEBPACK_IMPORTED_MODULE_0__["REQUEST_PHOTOS_FAILED"],
+        payload: error
+      });
+    });
   };
 };
 
-var displayCarouselModal = function displayCarouselModal(id) {
-  return function (dispatch) {
-    return dispatch({
-      type: _actionTypes__WEBPACK_IMPORTED_MODULE_0__["TOGGLE_CAROUSEL_MODAL"],
-      payload: id
-    });
-  };
-};
-var displayPhotoModal = function displayPhotoModal() {
-  return function (dispatch) {
-    return dispatch({
-      type: _actionTypes__WEBPACK_IMPORTED_MODULE_0__["TOGGLE_PHOTO_MODAL"]
-    });
-  };
-};
 /* harmony default export */ __webpack_exports__["default"] = (requestPhotos);
 
 /***/ }),
@@ -267,10 +226,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../store */ "./client/src/store.jsx");
 /* harmony import */ var _Photos__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Photos */ "./client/src/components/Photos.jsx");
-/* harmony import */ var _ModalPhotos__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./ModalPhotos */ "./client/src/components/ModalPhotos.jsx");
-/* harmony import */ var _CarouselModal__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./CarouselModal */ "./client/src/components/CarouselModal.jsx");
-
-
 
 
 
@@ -279,545 +234,10 @@ __webpack_require__.r(__webpack_exports__);
 var App = function App() {
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_redux__WEBPACK_IMPORTED_MODULE_1__["Provider"], {
     store: _store__WEBPACK_IMPORTED_MODULE_2__["default"]
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Photos__WEBPACK_IMPORTED_MODULE_3__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ModalPhotos__WEBPACK_IMPORTED_MODULE_4__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_CarouselModal__WEBPACK_IMPORTED_MODULE_5__["default"], null)));
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Photos__WEBPACK_IMPORTED_MODULE_3__["default"], null)));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (App);
-
-/***/ }),
-
-/***/ "./client/src/components/CarouselModal.jsx":
-/*!*************************************************!*\
-  !*** ./client/src/components/CarouselModal.jsx ***!
-  \*************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _action_actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../action/actions */ "./client/src/action/actions.jsx");
-/* harmony import */ var _ImageCarousel__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./ImageCarousel */ "./client/src/components/ImageCarousel.jsx");
-/* harmony import */ var _overview_module_css__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../overview.module.css */ "./client/src/overview.module.css");
-/* harmony import */ var _overview_module_css__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_overview_module_css__WEBPACK_IMPORTED_MODULE_5__);
-function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
-
-
-
-
-
-
-
-var CarouselModal =
-/*#__PURE__*/
-function (_Component) {
-  _inherits(CarouselModal, _Component);
-
-  function CarouselModal() {
-    _classCallCheck(this, CarouselModal);
-
-    return _possibleConstructorReturn(this, _getPrototypeOf(CarouselModal).apply(this, arguments));
-  }
-
-  _createClass(CarouselModal, [{
-    key: "toggleCarouselModal",
-    value: function toggleCarouselModal() {
-      var onModalRequest = this.props.onModalRequest;
-      onModalRequest();
-    }
-  }, {
-    key: "render",
-    value: function render() {
-      var _this$props = this.props,
-          openCarouselModal = _this$props.openCarouselModal,
-          name = _this$props.name;
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, openCarouselModal && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: _overview_module_css__WEBPACK_IMPORTED_MODULE_5___default.a.modal,
-        show: openCarouselModal.toString(),
-        style: {
-          display: 'block'
-        },
-        id: "ModalPhotos",
-        tabIndex: "-1",
-        role: "dialog",
-        "aria-labelledby": "ModalPhotosTitle",
-        "aria-hidden": "true"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        role: "document"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: _overview_module_css__WEBPACK_IMPORTED_MODULE_5___default.a.modalheader
-      }, name && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", {
-        className: "modal-title text-center"
-      }, name.toUpperCase()), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-        type: "button",
-        className: _overview_module_css__WEBPACK_IMPORTED_MODULE_5___default.a.closebutton,
-        "data-dismiss": "modal",
-        "aria-label": "Close",
-        onClick: this.toggleCarouselModal.bind(this)
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-        "aria-hidden": "true",
-        className: "text-white"
-      }, " \xD7 "))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "".concat(_overview_module_css__WEBPACK_IMPORTED_MODULE_5___default.a.modalcontent, " ").concat(_overview_module_css__WEBPACK_IMPORTED_MODULE_5___default.a.carouselmodal)
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ImageCarousel__WEBPACK_IMPORTED_MODULE_4__["default"], null)))));
-    }
-  }]);
-
-  return CarouselModal;
-}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
-
-var mapStateToProps = function mapStateToProps(state) {
-  return {
-    name: state.photos.name,
-    openCarouselModal: state.photos.openCarouselModal
-  };
-};
-
-var mapDispatchToProps = function mapDispatchToProps(dispatch) {
-  return {
-    onModalRequest: function onModalRequest() {
-      return dispatch(Object(_action_actions__WEBPACK_IMPORTED_MODULE_3__["displayCarouselModal"])());
-    }
-  };
-};
-
-CarouselModal.propTypes = {
-  name: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.string.isRequired,
-  openCarouselModal: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.bool.isRequired,
-  onModalRequest: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.func.isRequired
-};
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapStateToProps, mapDispatchToProps)(CarouselModal));
-
-/***/ }),
-
-/***/ "./client/src/components/ImageCarousel.jsx":
-/*!*************************************************!*\
-  !*** ./client/src/components/ImageCarousel.jsx ***!
-  \*************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _action_actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../action/actions */ "./client/src/action/actions.jsx");
-/* harmony import */ var _overview_module_css__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../overview.module.css */ "./client/src/overview.module.css");
-/* harmony import */ var _overview_module_css__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_overview_module_css__WEBPACK_IMPORTED_MODULE_4__);
-function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
-
-
-
-
-
-
-var ImageCarousel =
-/*#__PURE__*/
-function (_Component) {
-  _inherits(ImageCarousel, _Component);
-
-  function ImageCarousel(props) {
-    var _this;
-
-    _classCallCheck(this, ImageCarousel);
-
-    _this = _possibleConstructorReturn(this, _getPrototypeOf(ImageCarousel).call(this, props));
-    _this.state = {
-      currentId: null
-    };
-    return _this;
-  }
-
-  _createClass(ImageCarousel, [{
-    key: "componentDidMount",
-    value: function componentDidMount() {
-      var currentStoreId = this.props.currentStoreId;
-      document.getElementById("carouselModalImage".concat(currentStoreId.toString())).classList.add('d-flex');
-      document.getElementById("carouselModalImage".concat(currentStoreId.toString())).classList.remove('d-none');
-      this.setState({
-        currentId: currentStoreId
-      });
-    }
-  }, {
-    key: "onNext",
-    value: function onNext() {
-      var photos = this.props.photos;
-      var currentId = this.state.currentId;
-      var newId = currentId >= photos.length ? 1 : currentId + 1;
-      document.getElementById("carouselModalImage".concat(newId.toString())).classList.add('d-flex');
-      document.getElementById("carouselModalImage".concat(newId.toString())).classList.remove('d-none');
-      document.getElementById("carouselModalImage".concat(currentId.toString())).classList.add('d-none');
-      document.getElementById("carouselModalImage".concat(currentId.toString())).classList.remove('d-flex');
-      this.setState({
-        currentId: newId
-      });
-    }
-  }, {
-    key: "onPrev",
-    value: function onPrev() {
-      var photos = this.props.photos;
-      var currentId = this.state.currentId;
-      var newId = currentId <= 1 ? photos.length : currentId - 1;
-      document.getElementById("carouselModalImage".concat(newId.toString())).classList.add('d-flex');
-      document.getElementById("carouselModalImage".concat(newId.toString())).classList.remove('d-none');
-      document.getElementById("carouselModalImage".concat(currentId.toString())).classList.add('d-none');
-      document.getElementById("carouselModalImage".concat(currentId.toString())).classList.remove('d-flex');
-      this.setState({
-        currentId: newId
-      });
-    }
-  }, {
-    key: "togglePhotoModal",
-    value: function togglePhotoModal() {
-      var _this$props = this.props,
-          onPhotoModalRequest = _this$props.onPhotoModalRequest,
-          onCarouselModalRequest = _this$props.onCarouselModalRequest;
-      onCarouselModalRequest();
-      onPhotoModalRequest();
-    }
-  }, {
-    key: "render",
-    value: function render() {
-      var photos = this.props.photos;
-      var currentId = this.state.currentId;
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        id: "imageCarousel",
-        className: "carousel slide"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: _overview_module_css__WEBPACK_IMPORTED_MODULE_4___default.a.slideshowView
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "".concat(currentId, " of ").concat(photos.length)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-        className: _overview_module_css__WEBPACK_IMPORTED_MODULE_4___default.a.modalicon,
-        onClick: this.togglePhotoModal.bind(this)
-      }, "\u2750")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "carousel-inner"
-      }, photos.map(function (photo) {
-        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "carousel-item d-none align-items-center justify-content-center",
-          key: photo.photoId,
-          id: "carouselModalImage".concat(photo.photoId)
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-          src: photo.photo_url,
-          alt: "",
-          className: _overview_module_css__WEBPACK_IMPORTED_MODULE_4___default.a.carouselimg
-        }));
-      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "carousel-control-prev"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-        className: "carousel-control-prev-icon",
-        "aria-hidden": "true",
-        onClick: this.onPrev.bind(this)
-      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "carousel-control-next"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-        className: "carousel-control-next-icon",
-        "aria-hidden": "true",
-        onClick: this.onNext.bind(this)
-      })));
-    }
-  }]);
-
-  return ImageCarousel;
-}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
-
-var mapStateToProp = function mapStateToProp(state) {
-  return {
-    currentStoreId: state.photos.currentStoreId,
-    photos: state.photos.photos
-  };
-};
-
-var mapDispatchToProps = function mapDispatchToProps(dispatch) {
-  return {
-    onCarouselModalRequest: function onCarouselModalRequest() {
-      return dispatch(Object(_action_actions__WEBPACK_IMPORTED_MODULE_3__["displayCarouselModal"])());
-    },
-    onPhotoModalRequest: function onPhotoModalRequest() {
-      return dispatch(Object(_action_actions__WEBPACK_IMPORTED_MODULE_3__["displayPhotoModal"])());
-    }
-  };
-};
-
-ImageCarousel.propTypes = {
-  currentStoreId: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.number.isRequired,
-  photos: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.instanceOf(Array).isRequired,
-  onPhotoModalRequest: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.func.isRequired,
-  onCarouselModalRequest: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.func.isRequired
-};
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapStateToProp, mapDispatchToProps)(ImageCarousel));
-
-/***/ }),
-
-/***/ "./client/src/components/ModalPhotos.jsx":
-/*!***********************************************!*\
-  !*** ./client/src/components/ModalPhotos.jsx ***!
-  \***********************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _Photo__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Photo */ "./client/src/components/Photo.jsx");
-/* harmony import */ var _action_actions__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../action/actions */ "./client/src/action/actions.jsx");
-/* harmony import */ var _overview_module_css__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../overview.module.css */ "./client/src/overview.module.css");
-/* harmony import */ var _overview_module_css__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_overview_module_css__WEBPACK_IMPORTED_MODULE_5__);
-function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
-
-
-
-
-
-
-
-var ModalPhotos =
-/*#__PURE__*/
-function (_Component) {
-  _inherits(ModalPhotos, _Component);
-
-  function ModalPhotos() {
-    _classCallCheck(this, ModalPhotos);
-
-    return _possibleConstructorReturn(this, _getPrototypeOf(ModalPhotos).apply(this, arguments));
-  }
-
-  _createClass(ModalPhotos, [{
-    key: "togglePhotoModal",
-    value: function togglePhotoModal() {
-      var onPhotoModalRequest = this.props.onPhotoModalRequest;
-      onPhotoModalRequest();
-    }
-  }, {
-    key: "render",
-    value: function render() {
-      var _this$props = this.props,
-          photos = _this$props.photos,
-          name = _this$props.name,
-          openPhotoModal = _this$props.openPhotoModal;
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, openPhotoModal && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: _overview_module_css__WEBPACK_IMPORTED_MODULE_5___default.a.modal,
-        show: openPhotoModal.toString(),
-        style: {
-          display: 'block'
-        },
-        id: "ModalPhotos",
-        tabIndex: "-1",
-        role: "dialog",
-        onClick: this.togglePhotoModal.bind(this),
-        "aria-labelledby": "ModalPhotosTitle",
-        "aria-hidden": "true"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        role: "document"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: _overview_module_css__WEBPACK_IMPORTED_MODULE_5___default.a.modalheader
-      }, name && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", {
-        className: "modal-title text-center"
-      }, name.toUpperCase()), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-        type: "button",
-        className: _overview_module_css__WEBPACK_IMPORTED_MODULE_5___default.a.closebutton,
-        "data-dismiss": "modal",
-        "aria-label": "Close"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-        "aria-hidden": "true",
-        className: "text-white"
-      }, " \xD7 "))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: _overview_module_css__WEBPACK_IMPORTED_MODULE_5___default.a.modalcontent
-      }, photos.length && photos.map(function (link) {
-        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Photo__WEBPACK_IMPORTED_MODULE_3__["default"], {
-          key: link.photoId,
-          link: link
-        });
-      })))));
-    }
-  }]);
-
-  return ModalPhotos;
-}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
-
-var mapStateToProps = function mapStateToProps(state) {
-  return {
-    name: state.photos.name,
-    photos: state.photos.photos,
-    openPhotoModal: state.photos.openPhotoModal
-  };
-};
-
-var mapDispatchToProps = function mapDispatchToProps(dispatch) {
-  return {
-    onPhotoModalRequest: function onPhotoModalRequest() {
-      return dispatch(Object(_action_actions__WEBPACK_IMPORTED_MODULE_4__["displayPhotoModal"])());
-    }
-  };
-};
-
-ModalPhotos.propTypes = {
-  name: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.string.isRequired,
-  photos: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.instanceOf(Array).isRequired,
-  openPhotoModal: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.bool.isRequired,
-  onPhotoModalRequest: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.func.isRequired
-};
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapStateToProps, mapDispatchToProps)(ModalPhotos));
-
-/***/ }),
-
-/***/ "./client/src/components/Photo.jsx":
-/*!*****************************************!*\
-  !*** ./client/src/components/Photo.jsx ***!
-  \*****************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
-/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _action_actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../action/actions */ "./client/src/action/actions.jsx");
-/* harmony import */ var _overview_module_css__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../overview.module.css */ "./client/src/overview.module.css");
-/* harmony import */ var _overview_module_css__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_overview_module_css__WEBPACK_IMPORTED_MODULE_4__);
-function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
-
-
-
-
-
-
-var Photo =
-/*#__PURE__*/
-function (_Component) {
-  _inherits(Photo, _Component);
-
-  function Photo() {
-    _classCallCheck(this, Photo);
-
-    return _possibleConstructorReturn(this, _getPrototypeOf(Photo).apply(this, arguments));
-  }
-
-  _createClass(Photo, [{
-    key: "onClick",
-    value: function onClick(e) {
-      var clickedId = Number(e.target.id);
-      var onCarouselModalRequest = this.props.onCarouselModalRequest;
-      onCarouselModalRequest(clickedId);
-    }
-  }, {
-    key: "render",
-    value: function render() {
-      var link = this.props.link;
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: _overview_module_css__WEBPACK_IMPORTED_MODULE_4___default.a.photos,
-        key: link.photoId
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: _overview_module_css__WEBPACK_IMPORTED_MODULE_4___default.a.photo
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-        src: link.photo_url,
-        alt: "",
-        className: _overview_module_css__WEBPACK_IMPORTED_MODULE_4___default.a.img,
-        id: link.photoId,
-        onClick: this.onClick.bind(this)
-      })));
-    }
-  }]);
-
-  return Photo;
-}(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
-
-var mapDispatchToProps = function mapDispatchToProps(dispatch) {
-  return {
-    onCarouselModalRequest: function onCarouselModalRequest(id) {
-      return dispatch(Object(_action_actions__WEBPACK_IMPORTED_MODULE_3__["displayCarouselModal"])(id));
-    }
-  };
-};
-
-Photo.propTypes = {
-  link: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.shape({
-    photoId: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.number.isRequired,
-    photo_url: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.string.isRequired
-  }).isRequired,
-  onCarouselModalRequest: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.func.isRequired
-};
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(null, mapDispatchToProps)(Photo));
 
 /***/ }),
 
@@ -836,9 +256,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var _action_actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../action/actions */ "./client/src/action/actions.jsx");
-/* harmony import */ var _overview_module_css__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../overview.module.css */ "./client/src/overview.module.css");
-/* harmony import */ var _overview_module_css__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_overview_module_css__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var _Photo__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./Photo */ "./client/src/components/Photo.jsx");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -856,8 +273,6 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
-
 
 
 
@@ -882,18 +297,11 @@ function (_Component) {
       onRequestPhotos();
     }
   }, {
-    key: "togglePhotoModal",
-    value: function togglePhotoModal() {
-      var onPhotoModalRequest = this.props.onPhotoModalRequest;
-      onPhotoModalRequest();
-    }
-  }, {
     key: "render",
     value: function render() {
       var _this$props = this.props,
           pending = _this$props.pending,
           photos = _this$props.photos;
-      var sortPhotos = photos.slice(0, 4);
 
       if (pending && !photos.length) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -903,21 +311,25 @@ function (_Component) {
           role: "status"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
           className: "sr-only"
-        }, "Loading... Please go to a specific restaurant if you have not already done so")));
+        }, "Loading...")));
       }
 
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: _overview_module_css__WEBPACK_IMPORTED_MODULE_4___default.a.photodiv
-      }, sortPhotos.map(function (link) {
-        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Photo__WEBPACK_IMPORTED_MODULE_5__["default"], {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "container"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "row d-flex"
+      }, photos.map(function (link) {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+          src: link.photo_url,
+          alt: "",
           key: link.photoId,
-          link: link
+          style: {
+            height: '100px',
+            width: 'auto'
+          },
+          className: "flex-item"
         });
-      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-        type: "button",
-        className: _overview_module_css__WEBPACK_IMPORTED_MODULE_4___default.a.button,
-        onClick: this.togglePhotoModal.bind(this)
-      }, "".concat(photos.length, " PHOTOS \u25B7")));
+      })));
     }
   }]);
 
@@ -935,9 +347,6 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
     onRequestPhotos: function onRequestPhotos() {
       return dispatch(Object(_action_actions__WEBPACK_IMPORTED_MODULE_3__["default"])());
-    },
-    onPhotoModalRequest: function onPhotoModalRequest() {
-      return dispatch(Object(_action_actions__WEBPACK_IMPORTED_MODULE_3__["displayPhotoModal"])());
     }
   };
 };
@@ -945,8 +354,7 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
 Photos.propTypes = {
   photos: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.instanceOf(Array).isRequired,
   pending: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.bool.isRequired,
-  onRequestPhotos: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.func.isRequired,
-  onPhotoModalRequest: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.func.isRequired
+  onRequestPhotos: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.func.isRequired
 };
 /* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapStateToProps, mapDispatchToProps)(Photos));
 
@@ -970,36 +378,6 @@ __webpack_require__.r(__webpack_exports__);
 
 
 react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_App__WEBPACK_IMPORTED_MODULE_2__["default"], null), document.getElementById('overview'));
-
-/***/ }),
-
-/***/ "./client/src/overview.module.css":
-/*!****************************************!*\
-  !*** ./client/src/overview.module.css ***!
-  \****************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-
-var content = __webpack_require__(/*! !../../node_modules/css-loader/dist/cjs.js?modules=true&camelCase=true!./overview.module.css */ "./node_modules/css-loader/dist/cjs.js?modules=true&camelCase=true!./client/src/overview.module.css");
-
-if(typeof content === 'string') content = [[module.i, content, '']];
-
-var transform;
-var insertInto;
-
-
-
-var options = {"hmr":true}
-
-options.transform = transform
-options.insertInto = undefined;
-
-var update = __webpack_require__(/*! ../../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
-
-if(content.locals) module.exports = content.locals;
-
-if(false) {}
 
 /***/ }),
 
@@ -1120,133 +498,6 @@ function _objectWithoutPropertiesLoose(source, excluded) {
   }
 
   return target;
-}
-
-/***/ }),
-
-/***/ "./node_modules/css-loader/dist/cjs.js?modules=true&camelCase=true!./client/src/overview.module.css":
-/*!**********************************************************************************************************!*\
-  !*** ./node_modules/css-loader/dist/cjs.js?modules=true&camelCase=true!./client/src/overview.module.css ***!
-  \**********************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(/*! ../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js")(false);
-// Module
-exports.push([module.i, "._1RE3uB4Guj7M0wpKWtgIgv {\n  position: relative;\n}\n.HYxnprmpyHB8-f0sUR8vz {\n  margin: 0;\n  overflow: hidden;\n  width: 100%;\n  display: flex;\n  justify-content: space-around;\n}\n\n.MhnDLXeMb4AmOQQfNDCsx {\n  display: inline-flex;\n  width: 25%;\n}\n/* @media width 50% for small screen */\n\n._1SjL8WmHOgJqQrr3YNTOvA {\n  max-width: 100%;\n  height: 300px;\n  transform:  scale(0.97);\n  transition: transform 0.8s;\n}\n\n._1SjL8WmHOgJqQrr3YNTOvA:hover {\n  opacity: 0.9;\n  filter: brightness(90%);\n  transform: scale(1)\n}\n\n._1l1SEllJO9YAN3zkiK8JEa {\n  height: 100%;\n  width: 100%;\n}\n\n.n73XK7HDB6Gw7jzhNp3- {\n  height: 80vh;\n  background: rgba(0, 0, 0, 1);\n  display: block;\n}\n\n._26_4cDsfGTzKAX8Wkg3OKV {\n  padding: 8px;\n  font-size: 11px;\n  color: #ffffff;\n  background-color: #343434;\n  opacity: 0.7;\n  position: fixed;\n  right: 50px;\n  top: 130px;\n}\n\n._26_4cDsfGTzKAX8Wkg3OKV:hover {\n  background-color: #000;\n}\n\n._2xLezBWKeAAS9ljQUjuL0z {\n  min-height: 100%;\n  left: 0;\n  position: fixed;\n  top: 0;\n  min-width: 100%;\n  display: flex;\n  flex-direction: column;\n}\n\n._1LUAULDpFW3wCw1b2L0HRB {\n  background: rgba(34, 34, 34, 0.95);\n  color: #ffffff;\n  width: 100%;\n  min-height: 100vh;\n  max-height: 100%;\n  pointer-events: auto;\n  position: absolute;\n  overflow-y: auto;\n  padding-bottom: 5rem;\n}\n\n._1-VOBo4arWEyzpUt0eP0fh {\n  opacity: 1;\n  background: rgba(34, 34, 34, 0.9);\n}\n\n._1kh19h51LUiBQpOvq4eWgT {\n  background-color: #343434;\n  color: #ffffff;\n  display: block;\n  padding: 1.5rem;\n}\n\n\n._3SHuHEbqxTyrPdx4ycNN-f {\n  background-color: transparent;\n  position: fixed;\n  right: 1%;\n  top: 3%;\n  -webkit-appearance: none;\n  font-size: 1.5rem;\n  font-weight: 700;\n  line-height: 1;\n  opacity: 0.7;\n  border: none;\n  transform: scale(0.98);\n  transition: opacity 0.8s transform 0.8s ;\n}\n._3SHuHEbqxTyrPdx4ycNN-f:hover {\n  cursor: pointer;\n  opacity: 1;\n  transform: scale(1.03)\n}\n\n._2Dv30fFwlfebthdEbWC2o- {\n  background-color: transparent;\n  position: fixed;\n  right: 4%;\n  top: 3%;\n  display: inline-block;\n  -webkit-appearance: none;\n  font-size: 1rem;\n  opacity: 0.7;\n  border-right: 1px solid #ffffff;\n  padding: 2px;\n  margin-right: 5px;\n}\n\n._2YMyVm5-WqKzYTw-EqC5LH {\n  margin-left: 5px;\n  margin-right: 10px;\n}\n\n._2YMyVm5-WqKzYTw-EqC5LH:hover {\n  cursor: pointer;\n  opacity: 1;\n}\n\n", ""]);
-
-// Exports
-exports.locals = {
-	"body": "_1RE3uB4Guj7M0wpKWtgIgv",
-	"photodiv": "HYxnprmpyHB8-f0sUR8vz",
-	"photos": "MhnDLXeMb4AmOQQfNDCsx",
-	"photo": "_1SjL8WmHOgJqQrr3YNTOvA",
-	"img": "_1l1SEllJO9YAN3zkiK8JEa",
-	"carouselimg": "n73XK7HDB6Gw7jzhNp3-",
-	"button": "_26_4cDsfGTzKAX8Wkg3OKV",
-	"modal": "_2xLezBWKeAAS9ljQUjuL0z",
-	"modalcontent": "_1LUAULDpFW3wCw1b2L0HRB",
-	"carouselmodal": "_1-VOBo4arWEyzpUt0eP0fh",
-	"modalheader": "_1kh19h51LUiBQpOvq4eWgT",
-	"closebutton": "_3SHuHEbqxTyrPdx4ycNN-f",
-	"slideshowView": "_2Dv30fFwlfebthdEbWC2o-",
-	"modalicon": "_2YMyVm5-WqKzYTw-EqC5LH"
-};
-
-/***/ }),
-
-/***/ "./node_modules/css-loader/dist/runtime/api.js":
-/*!*****************************************************!*\
-  !*** ./node_modules/css-loader/dist/runtime/api.js ***!
-  \*****************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-/*
-  MIT License http://www.opensource.org/licenses/mit-license.php
-  Author Tobias Koppers @sokra
-*/
-// css base code, injected by the css-loader
-module.exports = function (useSourceMap) {
-  var list = []; // return the list of modules as css string
-
-  list.toString = function toString() {
-    return this.map(function (item) {
-      var content = cssWithMappingToString(item, useSourceMap);
-
-      if (item[2]) {
-        return '@media ' + item[2] + '{' + content + '}';
-      } else {
-        return content;
-      }
-    }).join('');
-  }; // import a list of modules into the list
-
-
-  list.i = function (modules, mediaQuery) {
-    if (typeof modules === 'string') {
-      modules = [[null, modules, '']];
-    }
-
-    var alreadyImportedModules = {};
-
-    for (var i = 0; i < this.length; i++) {
-      var id = this[i][0];
-
-      if (id != null) {
-        alreadyImportedModules[id] = true;
-      }
-    }
-
-    for (i = 0; i < modules.length; i++) {
-      var item = modules[i]; // skip already imported module
-      // this implementation is not 100% perfect for weird media query combinations
-      // when a module is imported multiple times with different media queries.
-      // I hope this will never occur (Hey this way we have smaller bundles)
-
-      if (item[0] == null || !alreadyImportedModules[item[0]]) {
-        if (mediaQuery && !item[2]) {
-          item[2] = mediaQuery;
-        } else if (mediaQuery) {
-          item[2] = '(' + item[2] + ') and (' + mediaQuery + ')';
-        }
-
-        list.push(item);
-      }
-    }
-  };
-
-  return list;
-};
-
-function cssWithMappingToString(item, useSourceMap) {
-  var content = item[1] || '';
-  var cssMapping = item[3];
-
-  if (!cssMapping) {
-    return content;
-  }
-
-  if (useSourceMap && typeof btoa === 'function') {
-    var sourceMapping = toComment(cssMapping);
-    var sourceURLs = cssMapping.sources.map(function (source) {
-      return '/*# sourceURL=' + cssMapping.sourceRoot + source + ' */';
-    });
-    return [content].concat(sourceURLs).concat([sourceMapping]).join('\n');
-  }
-
-  return [content].join('\n');
-} // Adapted from convert-source-map (MIT)
-
-
-function toComment(sourceMap) {
-  // eslint-disable-next-line no-undef
-  var base64 = btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap))));
-  var data = 'sourceMappingURL=data:application/json;charset=utf-8;base64,' + base64;
-  return '/*# ' + data + ' */';
 }
 
 /***/ }),
@@ -28062,515 +27313,6 @@ if (false) {} else {
 if (false) {} else {
   module.exports = __webpack_require__(/*! ./cjs/scheduler-tracing.development.js */ "./node_modules/scheduler/cjs/scheduler-tracing.development.js");
 }
-
-
-/***/ }),
-
-/***/ "./node_modules/style-loader/lib/addStyles.js":
-/*!****************************************************!*\
-  !*** ./node_modules/style-loader/lib/addStyles.js ***!
-  \****************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-/*
-	MIT License http://www.opensource.org/licenses/mit-license.php
-	Author Tobias Koppers @sokra
-*/
-
-var stylesInDom = {};
-
-var	memoize = function (fn) {
-	var memo;
-
-	return function () {
-		if (typeof memo === "undefined") memo = fn.apply(this, arguments);
-		return memo;
-	};
-};
-
-var isOldIE = memoize(function () {
-	// Test for IE <= 9 as proposed by Browserhacks
-	// @see http://browserhacks.com/#hack-e71d8692f65334173fee715c222cb805
-	// Tests for existence of standard globals is to allow style-loader
-	// to operate correctly into non-standard environments
-	// @see https://github.com/webpack-contrib/style-loader/issues/177
-	return window && document && document.all && !window.atob;
-});
-
-var getTarget = function (target, parent) {
-  if (parent){
-    return parent.querySelector(target);
-  }
-  return document.querySelector(target);
-};
-
-var getElement = (function (fn) {
-	var memo = {};
-
-	return function(target, parent) {
-                // If passing function in options, then use it for resolve "head" element.
-                // Useful for Shadow Root style i.e
-                // {
-                //   insertInto: function () { return document.querySelector("#foo").shadowRoot }
-                // }
-                if (typeof target === 'function') {
-                        return target();
-                }
-                if (typeof memo[target] === "undefined") {
-			var styleTarget = getTarget.call(this, target, parent);
-			// Special case to return head of iframe instead of iframe itself
-			if (window.HTMLIFrameElement && styleTarget instanceof window.HTMLIFrameElement) {
-				try {
-					// This will throw an exception if access to iframe is blocked
-					// due to cross-origin restrictions
-					styleTarget = styleTarget.contentDocument.head;
-				} catch(e) {
-					styleTarget = null;
-				}
-			}
-			memo[target] = styleTarget;
-		}
-		return memo[target]
-	};
-})();
-
-var singleton = null;
-var	singletonCounter = 0;
-var	stylesInsertedAtTop = [];
-
-var	fixUrls = __webpack_require__(/*! ./urls */ "./node_modules/style-loader/lib/urls.js");
-
-module.exports = function(list, options) {
-	if (typeof DEBUG !== "undefined" && DEBUG) {
-		if (typeof document !== "object") throw new Error("The style-loader cannot be used in a non-browser environment");
-	}
-
-	options = options || {};
-
-	options.attrs = typeof options.attrs === "object" ? options.attrs : {};
-
-	// Force single-tag solution on IE6-9, which has a hard limit on the # of <style>
-	// tags it will allow on a page
-	if (!options.singleton && typeof options.singleton !== "boolean") options.singleton = isOldIE();
-
-	// By default, add <style> tags to the <head> element
-        if (!options.insertInto) options.insertInto = "head";
-
-	// By default, add <style> tags to the bottom of the target
-	if (!options.insertAt) options.insertAt = "bottom";
-
-	var styles = listToStyles(list, options);
-
-	addStylesToDom(styles, options);
-
-	return function update (newList) {
-		var mayRemove = [];
-
-		for (var i = 0; i < styles.length; i++) {
-			var item = styles[i];
-			var domStyle = stylesInDom[item.id];
-
-			domStyle.refs--;
-			mayRemove.push(domStyle);
-		}
-
-		if(newList) {
-			var newStyles = listToStyles(newList, options);
-			addStylesToDom(newStyles, options);
-		}
-
-		for (var i = 0; i < mayRemove.length; i++) {
-			var domStyle = mayRemove[i];
-
-			if(domStyle.refs === 0) {
-				for (var j = 0; j < domStyle.parts.length; j++) domStyle.parts[j]();
-
-				delete stylesInDom[domStyle.id];
-			}
-		}
-	};
-};
-
-function addStylesToDom (styles, options) {
-	for (var i = 0; i < styles.length; i++) {
-		var item = styles[i];
-		var domStyle = stylesInDom[item.id];
-
-		if(domStyle) {
-			domStyle.refs++;
-
-			for(var j = 0; j < domStyle.parts.length; j++) {
-				domStyle.parts[j](item.parts[j]);
-			}
-
-			for(; j < item.parts.length; j++) {
-				domStyle.parts.push(addStyle(item.parts[j], options));
-			}
-		} else {
-			var parts = [];
-
-			for(var j = 0; j < item.parts.length; j++) {
-				parts.push(addStyle(item.parts[j], options));
-			}
-
-			stylesInDom[item.id] = {id: item.id, refs: 1, parts: parts};
-		}
-	}
-}
-
-function listToStyles (list, options) {
-	var styles = [];
-	var newStyles = {};
-
-	for (var i = 0; i < list.length; i++) {
-		var item = list[i];
-		var id = options.base ? item[0] + options.base : item[0];
-		var css = item[1];
-		var media = item[2];
-		var sourceMap = item[3];
-		var part = {css: css, media: media, sourceMap: sourceMap};
-
-		if(!newStyles[id]) styles.push(newStyles[id] = {id: id, parts: [part]});
-		else newStyles[id].parts.push(part);
-	}
-
-	return styles;
-}
-
-function insertStyleElement (options, style) {
-	var target = getElement(options.insertInto)
-
-	if (!target) {
-		throw new Error("Couldn't find a style target. This probably means that the value for the 'insertInto' parameter is invalid.");
-	}
-
-	var lastStyleElementInsertedAtTop = stylesInsertedAtTop[stylesInsertedAtTop.length - 1];
-
-	if (options.insertAt === "top") {
-		if (!lastStyleElementInsertedAtTop) {
-			target.insertBefore(style, target.firstChild);
-		} else if (lastStyleElementInsertedAtTop.nextSibling) {
-			target.insertBefore(style, lastStyleElementInsertedAtTop.nextSibling);
-		} else {
-			target.appendChild(style);
-		}
-		stylesInsertedAtTop.push(style);
-	} else if (options.insertAt === "bottom") {
-		target.appendChild(style);
-	} else if (typeof options.insertAt === "object" && options.insertAt.before) {
-		var nextSibling = getElement(options.insertAt.before, target);
-		target.insertBefore(style, nextSibling);
-	} else {
-		throw new Error("[Style Loader]\n\n Invalid value for parameter 'insertAt' ('options.insertAt') found.\n Must be 'top', 'bottom', or Object.\n (https://github.com/webpack-contrib/style-loader#insertat)\n");
-	}
-}
-
-function removeStyleElement (style) {
-	if (style.parentNode === null) return false;
-	style.parentNode.removeChild(style);
-
-	var idx = stylesInsertedAtTop.indexOf(style);
-	if(idx >= 0) {
-		stylesInsertedAtTop.splice(idx, 1);
-	}
-}
-
-function createStyleElement (options) {
-	var style = document.createElement("style");
-
-	if(options.attrs.type === undefined) {
-		options.attrs.type = "text/css";
-	}
-
-	if(options.attrs.nonce === undefined) {
-		var nonce = getNonce();
-		if (nonce) {
-			options.attrs.nonce = nonce;
-		}
-	}
-
-	addAttrs(style, options.attrs);
-	insertStyleElement(options, style);
-
-	return style;
-}
-
-function createLinkElement (options) {
-	var link = document.createElement("link");
-
-	if(options.attrs.type === undefined) {
-		options.attrs.type = "text/css";
-	}
-	options.attrs.rel = "stylesheet";
-
-	addAttrs(link, options.attrs);
-	insertStyleElement(options, link);
-
-	return link;
-}
-
-function addAttrs (el, attrs) {
-	Object.keys(attrs).forEach(function (key) {
-		el.setAttribute(key, attrs[key]);
-	});
-}
-
-function getNonce() {
-	if (false) {}
-
-	return __webpack_require__.nc;
-}
-
-function addStyle (obj, options) {
-	var style, update, remove, result;
-
-	// If a transform function was defined, run it on the css
-	if (options.transform && obj.css) {
-	    result = typeof options.transform === 'function'
-		 ? options.transform(obj.css) 
-		 : options.transform.default(obj.css);
-
-	    if (result) {
-	    	// If transform returns a value, use that instead of the original css.
-	    	// This allows running runtime transformations on the css.
-	    	obj.css = result;
-	    } else {
-	    	// If the transform function returns a falsy value, don't add this css.
-	    	// This allows conditional loading of css
-	    	return function() {
-	    		// noop
-	    	};
-	    }
-	}
-
-	if (options.singleton) {
-		var styleIndex = singletonCounter++;
-
-		style = singleton || (singleton = createStyleElement(options));
-
-		update = applyToSingletonTag.bind(null, style, styleIndex, false);
-		remove = applyToSingletonTag.bind(null, style, styleIndex, true);
-
-	} else if (
-		obj.sourceMap &&
-		typeof URL === "function" &&
-		typeof URL.createObjectURL === "function" &&
-		typeof URL.revokeObjectURL === "function" &&
-		typeof Blob === "function" &&
-		typeof btoa === "function"
-	) {
-		style = createLinkElement(options);
-		update = updateLink.bind(null, style, options);
-		remove = function () {
-			removeStyleElement(style);
-
-			if(style.href) URL.revokeObjectURL(style.href);
-		};
-	} else {
-		style = createStyleElement(options);
-		update = applyToTag.bind(null, style);
-		remove = function () {
-			removeStyleElement(style);
-		};
-	}
-
-	update(obj);
-
-	return function updateStyle (newObj) {
-		if (newObj) {
-			if (
-				newObj.css === obj.css &&
-				newObj.media === obj.media &&
-				newObj.sourceMap === obj.sourceMap
-			) {
-				return;
-			}
-
-			update(obj = newObj);
-		} else {
-			remove();
-		}
-	};
-}
-
-var replaceText = (function () {
-	var textStore = [];
-
-	return function (index, replacement) {
-		textStore[index] = replacement;
-
-		return textStore.filter(Boolean).join('\n');
-	};
-})();
-
-function applyToSingletonTag (style, index, remove, obj) {
-	var css = remove ? "" : obj.css;
-
-	if (style.styleSheet) {
-		style.styleSheet.cssText = replaceText(index, css);
-	} else {
-		var cssNode = document.createTextNode(css);
-		var childNodes = style.childNodes;
-
-		if (childNodes[index]) style.removeChild(childNodes[index]);
-
-		if (childNodes.length) {
-			style.insertBefore(cssNode, childNodes[index]);
-		} else {
-			style.appendChild(cssNode);
-		}
-	}
-}
-
-function applyToTag (style, obj) {
-	var css = obj.css;
-	var media = obj.media;
-
-	if(media) {
-		style.setAttribute("media", media)
-	}
-
-	if(style.styleSheet) {
-		style.styleSheet.cssText = css;
-	} else {
-		while(style.firstChild) {
-			style.removeChild(style.firstChild);
-		}
-
-		style.appendChild(document.createTextNode(css));
-	}
-}
-
-function updateLink (link, options, obj) {
-	var css = obj.css;
-	var sourceMap = obj.sourceMap;
-
-	/*
-		If convertToAbsoluteUrls isn't defined, but sourcemaps are enabled
-		and there is no publicPath defined then lets turn convertToAbsoluteUrls
-		on by default.  Otherwise default to the convertToAbsoluteUrls option
-		directly
-	*/
-	var autoFixUrls = options.convertToAbsoluteUrls === undefined && sourceMap;
-
-	if (options.convertToAbsoluteUrls || autoFixUrls) {
-		css = fixUrls(css);
-	}
-
-	if (sourceMap) {
-		// http://stackoverflow.com/a/26603875
-		css += "\n/*# sourceMappingURL=data:application/json;base64," + btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap)))) + " */";
-	}
-
-	var blob = new Blob([css], { type: "text/css" });
-
-	var oldSrc = link.href;
-
-	link.href = URL.createObjectURL(blob);
-
-	if(oldSrc) URL.revokeObjectURL(oldSrc);
-}
-
-
-/***/ }),
-
-/***/ "./node_modules/style-loader/lib/urls.js":
-/*!***********************************************!*\
-  !*** ./node_modules/style-loader/lib/urls.js ***!
-  \***********************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-
-/**
- * When source maps are enabled, `style-loader` uses a link element with a data-uri to
- * embed the css on the page. This breaks all relative urls because now they are relative to a
- * bundle instead of the current page.
- *
- * One solution is to only use full urls, but that may be impossible.
- *
- * Instead, this function "fixes" the relative urls to be absolute according to the current page location.
- *
- * A rudimentary test suite is located at `test/fixUrls.js` and can be run via the `npm test` command.
- *
- */
-
-module.exports = function (css) {
-  // get current location
-  var location = typeof window !== "undefined" && window.location;
-
-  if (!location) {
-    throw new Error("fixUrls requires window.location");
-  }
-
-	// blank or null?
-	if (!css || typeof css !== "string") {
-	  return css;
-  }
-
-  var baseUrl = location.protocol + "//" + location.host;
-  var currentDir = baseUrl + location.pathname.replace(/\/[^\/]*$/, "/");
-
-	// convert each url(...)
-	/*
-	This regular expression is just a way to recursively match brackets within
-	a string.
-
-	 /url\s*\(  = Match on the word "url" with any whitespace after it and then a parens
-	   (  = Start a capturing group
-	     (?:  = Start a non-capturing group
-	         [^)(]  = Match anything that isn't a parentheses
-	         |  = OR
-	         \(  = Match a start parentheses
-	             (?:  = Start another non-capturing groups
-	                 [^)(]+  = Match anything that isn't a parentheses
-	                 |  = OR
-	                 \(  = Match a start parentheses
-	                     [^)(]*  = Match anything that isn't a parentheses
-	                 \)  = Match a end parentheses
-	             )  = End Group
-              *\) = Match anything and then a close parens
-          )  = Close non-capturing group
-          *  = Match anything
-       )  = Close capturing group
-	 \)  = Match a close parens
-
-	 /gi  = Get all matches, not the first.  Be case insensitive.
-	 */
-	var fixedCss = css.replace(/url\s*\(((?:[^)(]|\((?:[^)(]+|\([^)(]*\))*\))*)\)/gi, function(fullMatch, origUrl) {
-		// strip quotes (if they exist)
-		var unquotedOrigUrl = origUrl
-			.trim()
-			.replace(/^"(.*)"$/, function(o, $1){ return $1; })
-			.replace(/^'(.*)'$/, function(o, $1){ return $1; });
-
-		// already a full url? no change
-		if (/^(#|data:|http:\/\/|https:\/\/|file:\/\/\/|\s*$)/i.test(unquotedOrigUrl)) {
-		  return fullMatch;
-		}
-
-		// convert the url to a full url
-		var newUrl;
-
-		if (unquotedOrigUrl.indexOf("//") === 0) {
-		  	//TODO: should we add protocol?
-			newUrl = unquotedOrigUrl;
-		} else if (unquotedOrigUrl.indexOf("/") === 0) {
-			// path should be relative to the base url
-			newUrl = baseUrl + unquotedOrigUrl; // already starts with '/'
-		} else {
-			// path should be relative to current directory
-			newUrl = currentDir + unquotedOrigUrl.replace(/^\.\//, ""); // Strip leading './'
-		}
-
-		// send back the fixed url(...)
-		return "url(" + JSON.stringify(newUrl) + ")";
-	});
-
-	// send back the fixed css
-	return fixedCss;
-};
 
 
 /***/ }),
