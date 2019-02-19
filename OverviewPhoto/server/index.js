@@ -11,7 +11,8 @@ app.use(parser.json());
 
 app.use(express.static('client/dist'));
 
-app.get('/:id', (req, res) => {
+
+app.get('/api/:id', (req, res) => {
   const { id } = req.params;
   findOne(id, (err, data) => {
     if (err) {
@@ -22,15 +23,19 @@ app.get('/:id', (req, res) => {
   });
 });
 
-// app.get('/all', (req, res) => {
-//   saveFakeData((err) => {
-//     if (err) {
-//       res.status(400).send(JSON.stringify(err));
-//     } else {
-//       res.status(200).send('database is completed');
-//     }
-//   });
-// });
+app.get('/:id', (req, res) => {
+  const { id } = req.params;
+  findOne(id, (err, data) => {
+    if (err) {
+      res.status(400).send(JSON.stringify(err));
+    } else if (data) {
+      res.set({ 'Content-Type': 'text/html' });
+      res.status(200).sendFile('index.html', { root: 'client/dist' });
+    } else {
+      res.status(404).end();
+    }
+  });
+});
 
 
 app.listen(process.env.PORT || port, () => {
