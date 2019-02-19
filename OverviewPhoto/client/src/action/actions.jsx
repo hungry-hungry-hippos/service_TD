@@ -2,7 +2,8 @@ import {
   REQUEST_PHOTOS_PENDING,
   REQUEST_PHOTOS_SUCCESS,
   REQUEST_PHOTOS_FAILED,
-  OPEN_CAROUSEL_MODAL,
+  TOGGLE_PHOTO_MODAL,
+  TOGGLE_CAROUSEL_MODAL,
 } from './actionTypes';
 
 const requestPhotos = () => (dispatch) => {
@@ -17,7 +18,11 @@ const requestPhotos = () => (dispatch) => {
 };
 
 export const displayCarouselModal = id => dispatch => dispatch(
-  { type: OPEN_CAROUSEL_MODAL, payload: id },
+  { type: TOGGLE_CAROUSEL_MODAL, payload: id },
+);
+
+export const displayPhotoModal = () => dispatch => dispatch(
+  { type: TOGGLE_PHOTO_MODAL },
 );
 
 export default requestPhotos;

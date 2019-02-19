@@ -126,6 +126,7 @@ var initialState = {
   photos: [],
   error: '',
   currentStoreId: null,
+  openPhotoModal: false,
   openCarouselModal: false
 };
 
@@ -152,7 +153,12 @@ var requestPhotos = function requestPhotos() {
         pending: false
       });
 
-    case _action_actionTypes__WEBPACK_IMPORTED_MODULE_0__["OPEN_CAROUSEL_MODAL"]:
+    case _action_actionTypes__WEBPACK_IMPORTED_MODULE_0__["TOGGLE_PHOTO_MODAL"]:
+      return _objectSpread({}, state, {
+        openPhotoModal: !state.openPhotoModal
+      });
+
+    case _action_actionTypes__WEBPACK_IMPORTED_MODULE_0__["TOGGLE_CAROUSEL_MODAL"]:
       return _objectSpread({}, state, {
         currentStoreId: action.payload,
         openCarouselModal: !state.openCarouselModal
@@ -163,7 +169,7 @@ var requestPhotos = function requestPhotos() {
   }
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (requestPhotos);
+/* harmony default export */ __webpack_exports__["default"] = (requestPhotos); // could have separate into 2 reducers
 
 /***/ }),
 
@@ -171,7 +177,7 @@ var requestPhotos = function requestPhotos() {
 /*!*******************************************!*\
   !*** ./client/src/action/actionTypes.jsx ***!
   \*******************************************/
-/*! exports provided: REQUEST_PHOTOS_PENDING, REQUEST_PHOTOS_SUCCESS, REQUEST_PHOTOS_FAILED, OPEN_CAROUSEL_MODAL */
+/*! exports provided: REQUEST_PHOTOS_PENDING, REQUEST_PHOTOS_SUCCESS, REQUEST_PHOTOS_FAILED, TOGGLE_PHOTO_MODAL, TOGGLE_CAROUSEL_MODAL */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -179,11 +185,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "REQUEST_PHOTOS_PENDING", function() { return REQUEST_PHOTOS_PENDING; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "REQUEST_PHOTOS_SUCCESS", function() { return REQUEST_PHOTOS_SUCCESS; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "REQUEST_PHOTOS_FAILED", function() { return REQUEST_PHOTOS_FAILED; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "OPEN_CAROUSEL_MODAL", function() { return OPEN_CAROUSEL_MODAL; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TOGGLE_PHOTO_MODAL", function() { return TOGGLE_PHOTO_MODAL; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TOGGLE_CAROUSEL_MODAL", function() { return TOGGLE_CAROUSEL_MODAL; });
 var REQUEST_PHOTOS_PENDING = 'REQUEST_PHOTOS_PENDING';
 var REQUEST_PHOTOS_SUCCESS = 'REQUEST_PHOTOS_SUCCESS';
 var REQUEST_PHOTOS_FAILED = 'REQUEST_PHOTOS_FAILED';
-var OPEN_CAROUSEL_MODAL = 'OPEN_CAROUSEL_MODAL';
+var TOGGLE_PHOTO_MODAL = 'TOGGLE_PHOTO_MODAL';
+var TOGGLE_CAROUSEL_MODAL = 'TOGGLE_CAROUSEL_MODAL';
 
 /***/ }),
 
@@ -191,12 +199,13 @@ var OPEN_CAROUSEL_MODAL = 'OPEN_CAROUSEL_MODAL';
 /*!***************************************!*\
   !*** ./client/src/action/actions.jsx ***!
   \***************************************/
-/*! exports provided: displayCarouselModal, default */
+/*! exports provided: displayCarouselModal, displayPhotoModal, default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "displayCarouselModal", function() { return displayCarouselModal; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "displayPhotoModal", function() { return displayPhotoModal; });
 /* harmony import */ var _actionTypes__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./actionTypes */ "./client/src/action/actionTypes.jsx");
 
 
@@ -228,8 +237,15 @@ var requestPhotos = function requestPhotos() {
 var displayCarouselModal = function displayCarouselModal(id) {
   return function (dispatch) {
     return dispatch({
-      type: _actionTypes__WEBPACK_IMPORTED_MODULE_0__["OPEN_CAROUSEL_MODAL"],
+      type: _actionTypes__WEBPACK_IMPORTED_MODULE_0__["TOGGLE_CAROUSEL_MODAL"],
       payload: id
+    });
+  };
+};
+var displayPhotoModal = function displayPhotoModal() {
+  return function (dispatch) {
+    return dispatch({
+      type: _actionTypes__WEBPACK_IMPORTED_MODULE_0__["TOGGLE_PHOTO_MODAL"]
     });
   };
 };
@@ -251,7 +267,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../store */ "./client/src/store.jsx");
 /* harmony import */ var _Photos__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Photos */ "./client/src/components/Photos.jsx");
-/* harmony import */ var _CarouselModal__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./CarouselModal */ "./client/src/components/CarouselModal.jsx");
+/* harmony import */ var _ModalPhotos__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./ModalPhotos */ "./client/src/components/ModalPhotos.jsx");
+/* harmony import */ var _CarouselModal__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./CarouselModal */ "./client/src/components/CarouselModal.jsx");
+
 
 
 
@@ -261,7 +279,7 @@ __webpack_require__.r(__webpack_exports__);
 var App = function App() {
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_redux__WEBPACK_IMPORTED_MODULE_1__["Provider"], {
     store: _store__WEBPACK_IMPORTED_MODULE_2__["default"]
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Photos__WEBPACK_IMPORTED_MODULE_3__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_CarouselModal__WEBPACK_IMPORTED_MODULE_4__["default"], null)));
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Photos__WEBPACK_IMPORTED_MODULE_3__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ModalPhotos__WEBPACK_IMPORTED_MODULE_4__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_CarouselModal__WEBPACK_IMPORTED_MODULE_5__["default"], null)));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (App);
@@ -560,8 +578,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var _Photo__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Photo */ "./client/src/components/Photo.jsx");
-/* harmony import */ var _overview_module_css__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../overview.module.css */ "./client/src/overview.module.css");
-/* harmony import */ var _overview_module_css__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_overview_module_css__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _action_actions__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../action/actions */ "./client/src/action/actions.jsx");
+/* harmony import */ var _overview_module_css__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../overview.module.css */ "./client/src/overview.module.css");
+/* harmony import */ var _overview_module_css__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_overview_module_css__WEBPACK_IMPORTED_MODULE_5__);
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -586,70 +605,59 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 
 
+
 var ModalPhotos =
 /*#__PURE__*/
 function (_Component) {
   _inherits(ModalPhotos, _Component);
 
-  function ModalPhotos(props) {
-    var _this;
-
+  function ModalPhotos() {
     _classCallCheck(this, ModalPhotos);
 
-    _this = _possibleConstructorReturn(this, _getPrototypeOf(ModalPhotos).call(this, props));
-    _this.state = {
-      showModal: false
-    };
-    return _this;
+    return _possibleConstructorReturn(this, _getPrototypeOf(ModalPhotos).apply(this, arguments));
   }
 
   _createClass(ModalPhotos, [{
-    key: "toggleModal",
-    value: function toggleModal() {
-      var showModal = this.state.showModal;
-      this.setState({
-        showModal: !showModal
-      });
+    key: "togglePhotoModal",
+    value: function togglePhotoModal() {
+      var onPhotoModalRequest = this.props.onPhotoModalRequest;
+      onPhotoModalRequest();
     }
   }, {
     key: "render",
     value: function render() {
       var _this$props = this.props,
           photos = _this$props.photos,
-          name = _this$props.name;
-      var showModal = this.state.showModal;
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, !showModal && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-        type: "button",
-        className: _overview_module_css__WEBPACK_IMPORTED_MODULE_4___default.a.button,
-        onClick: this.toggleModal.bind(this)
-      }, "".concat(photos.length, " PHOTOS \u25B7")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: _overview_module_css__WEBPACK_IMPORTED_MODULE_4___default.a.modal,
-        show: showModal.toString(),
+          name = _this$props.name,
+          openPhotoModal = _this$props.openPhotoModal;
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, openPhotoModal && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: _overview_module_css__WEBPACK_IMPORTED_MODULE_5___default.a.modal,
+        show: openPhotoModal.toString(),
         style: {
-          display: "".concat(showModal ? 'block' : 'none')
+          display: 'block'
         },
         id: "ModalPhotos",
         tabIndex: "-1",
         role: "dialog",
-        onClick: this.toggleModal.bind(this),
+        onClick: this.togglePhotoModal.bind(this),
         "aria-labelledby": "ModalPhotosTitle",
         "aria-hidden": "true"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         role: "document"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: _overview_module_css__WEBPACK_IMPORTED_MODULE_4___default.a.modalheader
+        className: _overview_module_css__WEBPACK_IMPORTED_MODULE_5___default.a.modalheader
       }, name && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", {
         className: "modal-title text-center"
       }, name.toUpperCase()), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         type: "button",
-        className: _overview_module_css__WEBPACK_IMPORTED_MODULE_4___default.a.closebutton,
+        className: _overview_module_css__WEBPACK_IMPORTED_MODULE_5___default.a.closebutton,
         "data-dismiss": "modal",
         "aria-label": "Close"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
         "aria-hidden": "true",
         className: "text-white"
       }, " \xD7 "))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: _overview_module_css__WEBPACK_IMPORTED_MODULE_4___default.a.modalcontent
+        className: _overview_module_css__WEBPACK_IMPORTED_MODULE_5___default.a.modalcontent
       }, photos.length && photos.map(function (link) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Photo__WEBPACK_IMPORTED_MODULE_3__["default"], {
           key: link.photoId,
@@ -665,15 +673,26 @@ function (_Component) {
 var mapStateToProps = function mapStateToProps(state) {
   return {
     name: state.photos.name,
-    photos: state.photos.photos
+    photos: state.photos.photos,
+    openPhotoModal: state.photos.openPhotoModal
+  };
+};
+
+var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+  return {
+    onPhotoModalRequest: function onPhotoModalRequest() {
+      return dispatch(Object(_action_actions__WEBPACK_IMPORTED_MODULE_4__["displayPhotoModal"])());
+    }
   };
 };
 
 ModalPhotos.propTypes = {
   name: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.string.isRequired,
-  photos: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.instanceOf(Array).isRequired
+  photos: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.instanceOf(Array).isRequired,
+  openPhotoModal: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.bool.isRequired,
+  onPhotoModalRequest: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.func.isRequired
 };
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapStateToProps)(ModalPhotos));
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapStateToProps, mapDispatchToProps)(ModalPhotos));
 
 /***/ }),
 
@@ -733,8 +752,8 @@ function (_Component) {
     key: "onClick",
     value: function onClick(e) {
       var clickedId = Number(e.target.id);
-      var onModalRequest = this.props.onModalRequest;
-      onModalRequest(clickedId);
+      var onCarouselModalRequest = this.props.onCarouselModalRequest;
+      onCarouselModalRequest(clickedId);
     }
   }, {
     key: "render",
@@ -760,7 +779,7 @@ function (_Component) {
 
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
-    onModalRequest: function onModalRequest(id) {
+    onCarouselModalRequest: function onCarouselModalRequest(id) {
       return dispatch(Object(_action_actions__WEBPACK_IMPORTED_MODULE_3__["displayCarouselModal"])(id));
     }
   };
@@ -771,7 +790,7 @@ Photo.propTypes = {
     photoId: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.number.isRequired,
     photo_url: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.string.isRequired
   }).isRequired,
-  onModalRequest: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.func.isRequired
+  onCarouselModalRequest: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.func.isRequired
 };
 /* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(null, mapDispatchToProps)(Photo));
 
@@ -794,8 +813,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _action_actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../action/actions */ "./client/src/action/actions.jsx");
 /* harmony import */ var _overview_module_css__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../overview.module.css */ "./client/src/overview.module.css");
 /* harmony import */ var _overview_module_css__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_overview_module_css__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var _ModalPhotos__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./ModalPhotos */ "./client/src/components/ModalPhotos.jsx");
-/* harmony import */ var _Photo__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./Photo */ "./client/src/components/Photo.jsx");
+/* harmony import */ var _Photo__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./Photo */ "./client/src/components/Photo.jsx");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -813,7 +831,6 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
 
 
 
@@ -840,6 +857,12 @@ function (_Component) {
       onRequestPhotos();
     }
   }, {
+    key: "togglePhotoModal",
+    value: function togglePhotoModal() {
+      var onPhotoModalRequest = this.props.onPhotoModalRequest;
+      onPhotoModalRequest();
+    }
+  }, {
     key: "render",
     value: function render() {
       var _this$props = this.props,
@@ -861,11 +884,15 @@ function (_Component) {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: _overview_module_css__WEBPACK_IMPORTED_MODULE_4___default.a.photodiv
       }, sortPhotos.map(function (link) {
-        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Photo__WEBPACK_IMPORTED_MODULE_6__["default"], {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Photo__WEBPACK_IMPORTED_MODULE_5__["default"], {
           key: link.photoId,
           link: link
         });
-      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ModalPhotos__WEBPACK_IMPORTED_MODULE_5__["default"], null));
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        type: "button",
+        className: _overview_module_css__WEBPACK_IMPORTED_MODULE_4___default.a.button,
+        onClick: this.togglePhotoModal.bind(this)
+      }, "".concat(photos.length, " PHOTOS \u25B7")));
     }
   }]);
 
@@ -883,6 +910,9 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
     onRequestPhotos: function onRequestPhotos() {
       return dispatch(Object(_action_actions__WEBPACK_IMPORTED_MODULE_3__["default"])());
+    },
+    onPhotoModalRequest: function onPhotoModalRequest() {
+      return dispatch(Object(_action_actions__WEBPACK_IMPORTED_MODULE_3__["displayPhotoModal"])());
     }
   };
 };
@@ -890,7 +920,8 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
 Photos.propTypes = {
   photos: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.instanceOf(Array).isRequired,
   pending: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.bool.isRequired,
-  onRequestPhotos: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.func.isRequired
+  onRequestPhotos: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.func.isRequired,
+  onPhotoModalRequest: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.func.isRequired
 };
 /* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapStateToProps, mapDispatchToProps)(Photos));
 

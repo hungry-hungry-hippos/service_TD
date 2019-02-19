@@ -15,39 +15,38 @@ class CarouselModal extends Component {
     const { openCarouselModal, name } = this.props;
     return (
       <div>
-        {openCarouselModal
-          && (
-            <div
-              className={style.modal}
-              show={openCarouselModal.toString()}
-              style={{
-                display: 'block',
-              }}
-              id="ModalPhotos"
-              tabIndex="-1"
-              role="dialog"
-              aria-labelledby="ModalPhotosTitle"
-              aria-hidden="true"
-            >
-              <div role="document">
-                <div className={style.modalheader}>
-                  {name && <h5 className="modal-title text-center">{name.toUpperCase()}</h5>}
-                  <button
-                    type="button"
-                    className={style.closebutton}
-                    data-dismiss="modal"
-                    aria-label="Close"
-                    onClick={this.toggleCarouselModal.bind(this)}
-                  >
-                    <span aria-hidden="true" className="text-white"> &times; </span>
-                  </button>
-                </div>
-                <div className={`${style.modalcontent} ${style.carouselmodal}`}>
-                  <ImageCarousel />
-                </div>
+        {openCarouselModal && (
+          <div
+            className={style.modal}
+            show={openCarouselModal.toString()}
+            style={{
+              display: 'block',
+            }}
+            id="ModalPhotos"
+            tabIndex="-1"
+            role="dialog"
+            aria-labelledby="ModalPhotosTitle"
+            aria-hidden="true"
+          >
+            <div role="document">
+              <div className={style.modalheader}>
+                {name && <h5 className="modal-title text-center">{name.toUpperCase()}</h5>}
+                <button
+                  type="button"
+                  className={style.closebutton}
+                  data-dismiss="modal"
+                  aria-label="Close"
+                  onClick={this.toggleCarouselModal.bind(this)}
+                >
+                  <span aria-hidden="true" className="text-white"> &times; </span>
+                </button>
+              </div>
+              <div className={`${style.modalcontent} ${style.carouselmodal}`}>
+                <ImageCarousel />
               </div>
             </div>
-          )
+          </div>
+        )
         }
       </div>
     );

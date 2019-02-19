@@ -7,8 +7,8 @@ import style from '../overview.module.css';
 class Photo extends Component {
   onClick(e) {
     const clickedId = Number(e.target.id);
-    const { onModalRequest } = this.props;
-    onModalRequest(clickedId);
+    const { onCarouselModalRequest } = this.props;
+    onCarouselModalRequest(clickedId);
   }
 
   render() {
@@ -25,7 +25,7 @@ class Photo extends Component {
 
 const mapDispatchToProps = dispatch => (
   {
-    onModalRequest: id => dispatch(displayCarouselModal(id)),
+    onCarouselModalRequest: id => dispatch(displayCarouselModal(id)),
   }
 );
 
@@ -34,7 +34,7 @@ Photo.propTypes = {
     photoId: Proptypes.number.isRequired,
     photo_url: Proptypes.string.isRequired,
   }).isRequired,
-  onModalRequest: Proptypes.func.isRequired,
+  onCarouselModalRequest: Proptypes.func.isRequired,
 };
 
 export default connect(null, mapDispatchToProps)(Photo);

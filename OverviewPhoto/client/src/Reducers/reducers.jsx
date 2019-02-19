@@ -2,7 +2,8 @@ import {
   REQUEST_PHOTOS_PENDING,
   REQUEST_PHOTOS_SUCCESS,
   REQUEST_PHOTOS_FAILED,
-  OPEN_CAROUSEL_MODAL,
+  TOGGLE_PHOTO_MODAL,
+  TOGGLE_CAROUSEL_MODAL,
 } from '../action/actionTypes';
 
 const initialState = {
@@ -11,6 +12,7 @@ const initialState = {
   photos: [],
   error: '',
   currentStoreId: null,
+  openPhotoModal: false,
   openCarouselModal: false,
 };
 
@@ -34,7 +36,12 @@ const requestPhotos = (state = initialState, action) => {
         error: action.payload,
         pending: false,
       };
-    case OPEN_CAROUSEL_MODAL:
+    case TOGGLE_PHOTO_MODAL:
+      return {
+        ...state,
+        openPhotoModal: !state.openPhotoModal,
+      };
+    case TOGGLE_CAROUSEL_MODAL:
       return {
         ...state,
         currentStoreId: action.payload,
@@ -46,3 +53,5 @@ const requestPhotos = (state = initialState, action) => {
 };
 
 export default requestPhotos;
+
+// could have separate into 2 reducers
