@@ -425,8 +425,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _overview_module_css__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../overview.module.css */ "./client/src/overview.module.css");
-/* harmony import */ var _overview_module_css__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_overview_module_css__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _action_actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../action/actions */ "./client/src/action/actions.jsx");
+/* harmony import */ var _overview_module_css__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../overview.module.css */ "./client/src/overview.module.css");
+/* harmony import */ var _overview_module_css__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_overview_module_css__WEBPACK_IMPORTED_MODULE_4__);
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -444,6 +445,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
 
 
 
@@ -506,6 +508,15 @@ function (_Component) {
       });
     }
   }, {
+    key: "togglePhotoModal",
+    value: function togglePhotoModal() {
+      var _this$props = this.props,
+          onPhotoModalRequest = _this$props.onPhotoModalRequest,
+          onCarouselModalRequest = _this$props.onCarouselModalRequest;
+      onCarouselModalRequest();
+      onPhotoModalRequest();
+    }
+  }, {
     key: "render",
     value: function render() {
       var photos = this.props.photos;
@@ -514,9 +525,10 @@ function (_Component) {
         id: "imageCarousel",
         className: "carousel slide"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: _overview_module_css__WEBPACK_IMPORTED_MODULE_3___default.a.slideshowView
+        className: _overview_module_css__WEBPACK_IMPORTED_MODULE_4___default.a.slideshowView
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "".concat(currentId, " of ").concat(photos.length)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-        className: _overview_module_css__WEBPACK_IMPORTED_MODULE_3___default.a.modalicon
+        className: _overview_module_css__WEBPACK_IMPORTED_MODULE_4___default.a.modalicon,
+        onClick: this.togglePhotoModal.bind(this)
       }, "\u2750")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "carousel-inner"
       }, photos.map(function (photo) {
@@ -527,7 +539,7 @@ function (_Component) {
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
           src: photo.photo_url,
           alt: "",
-          className: _overview_module_css__WEBPACK_IMPORTED_MODULE_3___default.a.carouselimg
+          className: _overview_module_css__WEBPACK_IMPORTED_MODULE_4___default.a.carouselimg
         }));
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "carousel-control-prev"
@@ -555,11 +567,24 @@ var mapStateToProp = function mapStateToProp(state) {
   };
 };
 
+var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+  return {
+    onCarouselModalRequest: function onCarouselModalRequest() {
+      return dispatch(Object(_action_actions__WEBPACK_IMPORTED_MODULE_3__["displayCarouselModal"])());
+    },
+    onPhotoModalRequest: function onPhotoModalRequest() {
+      return dispatch(Object(_action_actions__WEBPACK_IMPORTED_MODULE_3__["displayPhotoModal"])());
+    }
+  };
+};
+
 ImageCarousel.propTypes = {
   currentStoreId: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.number.isRequired,
-  photos: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.instanceOf(Array).isRequired
+  photos: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.instanceOf(Array).isRequired,
+  onPhotoModalRequest: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.func.isRequired,
+  onCarouselModalRequest: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.func.isRequired
 };
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapStateToProp)(ImageCarousel));
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapStateToProp, mapDispatchToProps)(ImageCarousel));
 
 /***/ }),
 
@@ -1108,7 +1133,7 @@ function _objectWithoutPropertiesLoose(source, excluded) {
 
 exports = module.exports = __webpack_require__(/*! ../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js")(false);
 // Module
-exports.push([module.i, "._1RE3uB4Guj7M0wpKWtgIgv {\n  position: relative;\n}\n.HYxnprmpyHB8-f0sUR8vz {\n  margin: 0;\n  overflow: hidden;\n  width: 100%;\n  display: flex;\n  justify-content: space-around;\n}\n\n.MhnDLXeMb4AmOQQfNDCsx {\n  display: inline-flex;\n  width: 25%;\n}\n/* @media width 50% for small screen */\n\n._1SjL8WmHOgJqQrr3YNTOvA {\n  max-width: 100%;\n  height: 300px;\n  transform:  scale(0.97);\n  transition: transform 0.8s;\n}\n\n._1SjL8WmHOgJqQrr3YNTOvA:hover {\n  opacity: 0.9;\n  filter: brightness(90%);\n  transform: scale(1)\n}\n\n._1l1SEllJO9YAN3zkiK8JEa {\n  height: 100%;\n  width: 100%;\n}\n\n.n73XK7HDB6Gw7jzhNp3- {\n  height: 80vh;\n  background: rgba(0, 0, 0, 1);\n  display: block;\n}\n\n._26_4cDsfGTzKAX8Wkg3OKV {\n  padding: 8px;\n  font-size: 11px;\n  color: #ffffff;\n  background-color: #343434;\n  opacity: 0.7;\n  position: fixed;\n  right: 50px;\n  top: 130px;\n}\n\n._26_4cDsfGTzKAX8Wkg3OKV:hover {\n  background-color: #000;\n}\n\n._2xLezBWKeAAS9ljQUjuL0z {\n  min-height: 100%;\n  left: 0;\n  position: fixed;\n  top: 0;\n  min-width: 100%;\n  display: flex;\n  flex-direction: column;\n}\n\n._1LUAULDpFW3wCw1b2L0HRB {\n  background: rgba(34, 34, 34, 0.95);\n  color: #ffffff;\n  width: 100%;\n  min-height: 100vh;\n  max-height: 100%;\n  pointer-events: auto;\n  position: absolute;\n  overflow-y: auto;\n  padding-bottom: 5rem;\n}\n\n._1-VOBo4arWEyzpUt0eP0fh {\n  opacity: 1;\n  background: rgba(34, 34, 34, 0.9);\n}\n\n._1kh19h51LUiBQpOvq4eWgT {\n  background-color: #343434;\n  color: #ffffff;\n  display: block;\n  padding: 1.5rem;\n}\n\n\n._3SHuHEbqxTyrPdx4ycNN-f {\n  background-color: transparent;\n  position: fixed;\n  right: 2%;\n  top: 3%;\n  -webkit-appearance: none;\n  font-size: 1.5rem;\n  font-weight: 700;\n  line-height: 1;\n  opacity: 0.7;\n  border: none;\n  transform: scale(0.98);\n  transition: opacity 0.8s transform 0.8s ;\n}\n._3SHuHEbqxTyrPdx4ycNN-f:hover {\n  cursor: pointer;\n  opacity: 1;\n  transform: scale(1.03)\n}\n\n._2Dv30fFwlfebthdEbWC2o- {\n  background-color: transparent;\n  position: fixed;\n  right: 4%;\n  top: 3%;\n  display: inline-block;\n  -webkit-appearance: none;\n  font-size: 1rem;\n  opacity: 0.7;\n  border-right: 1px solid #ffffff;\n  padding: 2px;\n  margin-right: 5px;\n}\n\n._2YMyVm5-WqKzYTw-EqC5LH {\n  margin-left: 5px;\n  margin-right: 10px;\n}\n\n/* .modalicon:hover {\n  cursor: pointer;\n  opacity: 1;\n} */\n\n", ""]);
+exports.push([module.i, "._1RE3uB4Guj7M0wpKWtgIgv {\n  position: relative;\n}\n.HYxnprmpyHB8-f0sUR8vz {\n  margin: 0;\n  overflow: hidden;\n  width: 100%;\n  display: flex;\n  justify-content: space-around;\n}\n\n.MhnDLXeMb4AmOQQfNDCsx {\n  display: inline-flex;\n  width: 25%;\n}\n/* @media width 50% for small screen */\n\n._1SjL8WmHOgJqQrr3YNTOvA {\n  max-width: 100%;\n  height: 300px;\n  transform:  scale(0.97);\n  transition: transform 0.8s;\n}\n\n._1SjL8WmHOgJqQrr3YNTOvA:hover {\n  opacity: 0.9;\n  filter: brightness(90%);\n  transform: scale(1)\n}\n\n._1l1SEllJO9YAN3zkiK8JEa {\n  height: 100%;\n  width: 100%;\n}\n\n.n73XK7HDB6Gw7jzhNp3- {\n  height: 80vh;\n  background: rgba(0, 0, 0, 1);\n  display: block;\n}\n\n._26_4cDsfGTzKAX8Wkg3OKV {\n  padding: 8px;\n  font-size: 11px;\n  color: #ffffff;\n  background-color: #343434;\n  opacity: 0.7;\n  position: fixed;\n  right: 50px;\n  top: 130px;\n}\n\n._26_4cDsfGTzKAX8Wkg3OKV:hover {\n  background-color: #000;\n}\n\n._2xLezBWKeAAS9ljQUjuL0z {\n  min-height: 100%;\n  left: 0;\n  position: fixed;\n  top: 0;\n  min-width: 100%;\n  display: flex;\n  flex-direction: column;\n}\n\n._1LUAULDpFW3wCw1b2L0HRB {\n  background: rgba(34, 34, 34, 0.95);\n  color: #ffffff;\n  width: 100%;\n  min-height: 100vh;\n  max-height: 100%;\n  pointer-events: auto;\n  position: absolute;\n  overflow-y: auto;\n  padding-bottom: 5rem;\n}\n\n._1-VOBo4arWEyzpUt0eP0fh {\n  opacity: 1;\n  background: rgba(34, 34, 34, 0.9);\n}\n\n._1kh19h51LUiBQpOvq4eWgT {\n  background-color: #343434;\n  color: #ffffff;\n  display: block;\n  padding: 1.5rem;\n}\n\n\n._3SHuHEbqxTyrPdx4ycNN-f {\n  background-color: transparent;\n  position: fixed;\n  right: 1%;\n  top: 3%;\n  -webkit-appearance: none;\n  font-size: 1.5rem;\n  font-weight: 700;\n  line-height: 1;\n  opacity: 0.7;\n  border: none;\n  transform: scale(0.98);\n  transition: opacity 0.8s transform 0.8s ;\n}\n._3SHuHEbqxTyrPdx4ycNN-f:hover {\n  cursor: pointer;\n  opacity: 1;\n  transform: scale(1.03)\n}\n\n._2Dv30fFwlfebthdEbWC2o- {\n  background-color: transparent;\n  position: fixed;\n  right: 4%;\n  top: 3%;\n  display: inline-block;\n  -webkit-appearance: none;\n  font-size: 1rem;\n  opacity: 0.7;\n  border-right: 1px solid #ffffff;\n  padding: 2px;\n  margin-right: 5px;\n}\n\n._2YMyVm5-WqKzYTw-EqC5LH {\n  margin-left: 5px;\n  margin-right: 10px;\n}\n\n._2YMyVm5-WqKzYTw-EqC5LH:hover {\n  cursor: pointer;\n  opacity: 1;\n}\n\n", ""]);
 
 // Exports
 exports.locals = {

@@ -92,7 +92,7 @@
 .closebutton {
   background-color: transparent;
   position: fixed;
-  right: 2%;
+  right: 1%;
   top: 3%;
   -webkit-appearance: none;
   font-size: 1.5rem;
@@ -128,8 +128,8 @@
   margin-right: 10px;
 }
 
-/* .modalicon:hover {
+.modalicon:hover {
   cursor: pointer;
   opacity: 1;
-} */
+}
 

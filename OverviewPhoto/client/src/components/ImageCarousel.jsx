@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Proptypes from 'prop-types';
+import { displayPhotoModal, displayCarouselModal } from '../action/actions';
 import style from '../overview.module.css';
 
 class ImageCarousel extends Component {
@@ -40,6 +41,13 @@ class ImageCarousel extends Component {
     this.setState({ currentId: newId });
   }
 
+
+  togglePhotoModal() {
+    const { onPhotoModalRequest, onCarouselModalRequest } = this.props;
+    onCarouselModalRequest();
+    onPhotoModalRequest();
+  }
+
   render() {
     const { photos } = this.props;
     const { currentId } = this.state;
@@ -47,7 +55,7 @@ class ImageCarousel extends Component {
       <div id="imageCarousel" className="carousel slide">
         <div className={style.slideshowView}>
           <span>{`${currentId} of ${photos.length}`}</span>
-          <span className={style.modalicon}>❐</span>
+          <span className={style.modalicon} onClick={this.togglePhotoModal.bind(this)}>❐</span>
         </div>
         <div className="carousel-inner">
           {photos.map(photo => (
@@ -75,10 +83,19 @@ const mapStateToProp = state => (
   }
 );
 
+const mapDispatchToProps = dispatch => (
+  {
+    onCarouselModalRequest: () => dispatch(displayCarouselModal()),
+    onPhotoModalRequest: () => dispatch(displayPhotoModal()),
+  }
+);
+
 ImageCarousel.propTypes = {
   currentStoreId: Proptypes.number.isRequired,
   photos: Proptypes.instanceOf(Array).isRequired,
+  onPhotoModalRequest: Proptypes.func.isRequired,
+  onCarouselModalRequest: Proptypes.func.isRequired,
 };
 
 
-export default connect(mapStateToProp)(ImageCarousel);
+export default connect(mapStateToProp, mapDispatchToProps)(ImageCarousel);
