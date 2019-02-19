@@ -14,7 +14,7 @@ class Photo extends Component {
   render() {
     const { link } = this.props;
     return (
-      <div className={style.photos} key={link.photoId}>
+      <div className={style.modalphotos} key={link.photoId}>
         <div className={style.photo}>
           <img src={link.photo_url} alt="" className={style.img} id={link.photoId} onClick={this.onClick.bind(this)} />
         </div>
