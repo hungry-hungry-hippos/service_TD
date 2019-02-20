@@ -82,6 +82,10 @@
   position: absolute;
   overflow-y: auto;
   padding-bottom: 5rem;
+  justify-content: center
+}
+
+.photomodalcontent{
   display: flex;
   flex-wrap: wrap;
 }

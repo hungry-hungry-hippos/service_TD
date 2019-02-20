@@ -37,7 +37,7 @@ class ModalPhotos extends Component {
                   <span aria-hidden="true" className="text-white"> &times; </span>
                 </button>
               </div>
-              <div className={style.modalcontent}>
+              <div className={`${style.modalcontent} ${style.photomodalcontent}`}>
                 {photos.length && photos.map(link => <Photo key={link.photoId} link={link} />)}
               </div>
             </div>
