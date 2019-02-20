@@ -52,7 +52,7 @@
   color: #ffffff;
   background-color: #343434;
   opacity: 0.7;
-  position: fixed;
+  position: absolute;
   right: 50px;
   top: 130px;
 }

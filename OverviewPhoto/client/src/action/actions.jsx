@@ -8,13 +8,14 @@ import {
 
 const requestPhotos = () => (dispatch) => {
   dispatch({ type: REQUEST_PHOTOS_PENDING });
-  const id = parseInt(window.location.pathname.slice(1), 10);
-  if (!Number.isNaN(id)) {
-    fetch(`http://localhost:3020/api/${id}`)
-      .then(response => response.json())
-      .then(data => dispatch({ type: REQUEST_PHOTOS_SUCCESS, payload: data }))
-      .catch(error => dispatch({ type: REQUEST_PHOTOS_FAILED, payload: error }));
+  let id = parseInt(window.location.pathname.slice(1), 10);
+  if (Number.isNaN(id)) {
+    id = 1;
   }
+  fetch(`http://localhost:3020/api/${id}`)
+    .then(response => response.json())
+    .then(data => dispatch({ type: REQUEST_PHOTOS_SUCCESS, payload: data }))
+    .catch(error => dispatch({ type: REQUEST_PHOTOS_FAILED, payload: error }));
 };
 
 export const displayCarouselModal = id => dispatch => dispatch(
