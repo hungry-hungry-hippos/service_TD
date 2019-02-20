@@ -11,6 +11,13 @@ app.use(parser.json());
 
 app.use(express.static('client/dist'));
 
+app.use((req, res, next) => {
+  res.append('Access-Control-Allow-Origin', ['*']);
+  res.append('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+  res.append('Access-Control-Allow-Headers', 'Content-Type');
+  next();
+});
+
 
 app.get('/api/:id', (req, res) => {
   const { id } = req.params;
@@ -23,19 +30,21 @@ app.get('/api/:id', (req, res) => {
   });
 });
 
-app.get('/:id', (req, res) => {
-  const { id } = req.params;
-  findOne(id, (err, data) => {
-    if (err) {
-      res.status(400).send(JSON.stringify(err));
-    } else if (data) {
-      res.set({ 'Content-Type': 'text/html' });
-      res.status(200).sendFile('index.html', { root: 'client/dist' });
-    } else {
-      res.status(404).end();
-    }
-  });
-});
+app.use('/:id', express.static('client/dist'));
+
+// app.get('/:id', (req, res) => {
+//   const { id } = req.params;
+//   findOne(id, (err, data) => {
+//     if (err) {
+//       res.status(400).send(JSON.stringify(err));
+//     } else if (data) {
+//       res.set({ 'Content-Type': 'text/html' });
+//       res.status(200).sendFile('index.html', { root: 'client/dist' });
+//     } else {
+//       res.status(404).end();
+//     }
+//   });
+// });
 
 
 app.listen(process.env.PORT || port, () => {
