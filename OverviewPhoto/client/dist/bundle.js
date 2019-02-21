@@ -220,7 +220,7 @@ var requestPhotos = function requestPhotos() {
       id = 1;
     }
 
-    fetch("http://localhost:3020/api/".concat(id)).then(function (response) {
+    fetch("/api/".concat(id)).then(function (response) {
       return response.json();
     }).then(function (data) {
       return dispatch({
