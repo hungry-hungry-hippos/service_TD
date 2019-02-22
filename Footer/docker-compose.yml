@@ -1,0 +1,12 @@
+version: '3'
+
+services:
+  footer:
+    build: .
+    depends_on:
+      - 'database'
+    ports: 
+      - '80:3021'
+
+  database:
+    image: mongo:latest
