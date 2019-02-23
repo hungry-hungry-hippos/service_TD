@@ -3,10 +3,6 @@ version: '3'
 services:
   footer:
     build: .
-    depends_on:
-      - 'database'
+    image: trangdo94/footer:footer
     ports: 
       - '80:3021'
-
-  database:
-    image: mongo:latest
