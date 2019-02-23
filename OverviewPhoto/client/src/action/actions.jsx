@@ -12,7 +12,7 @@ const requestPhotos = () => (dispatch) => {
   if (Number.isNaN(id)) {
     id = 1;
   }
-  fetch(`http://localhost:3020/api/${id}`)
+  fetch(`/api/${id}`)
     .then(response => response.json())
     .then(data => dispatch({ type: REQUEST_PHOTOS_SUCCESS, payload: data }))
     .catch(error => dispatch({ type: REQUEST_PHOTOS_FAILED, payload: error }));

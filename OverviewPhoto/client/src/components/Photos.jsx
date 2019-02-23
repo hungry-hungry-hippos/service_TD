@@ -35,10 +35,10 @@ class Photos extends Component {
       <div>
         <div className={style.photodiv}>
           {sortPhotos.map(link => <Photo key={link.photoId} link={link} />)}
+          <button type="button" className={style.button} onClick={this.togglePhotoModal.bind(this)}>
+            {`${photos.length} PHOTOS ▷`}
+          </button>
         </div>
-        <button type="button" className={style.button} onClick={this.togglePhotoModal.bind(this)}>
-          {`${photos.length} PHOTOS ▷`}
-        </button>
       </div>
     );
   }

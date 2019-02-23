@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 
-mongoose.connect('mongodb://localhost/photos', (err) => {
+mongoose.connect('mongodb://database:27017/photos', (err) => {
   if (err) {
     return console.error(err, 'Error to connect');
   }

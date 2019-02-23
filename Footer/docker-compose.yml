@@ -1,0 +1,8 @@
+version: '3'
+
+services:
+  footer:
+    build: .
+    image: trangdo94/footer:footer
+    ports: 
+      - '80:3021'
