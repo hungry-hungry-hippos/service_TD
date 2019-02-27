@@ -4,10 +4,9 @@
 
 ## Related Projects
 
-  - https://github.com/teamName/repo
-  - https://github.com/teamName/repo
-  - https://github.com/teamName/repo
-  - https://github.com/teamName/repo
+  - https://github.com/hungry-hungry-hippos/service_TD
+  - https://github.com/hungry-hungry-hippos/service-KC
+  - https://github.com/hungry-hungry-hippos/proxy_TD
 
 ## Table of Contents
 
@@ -18,13 +17,15 @@
 ## Usage
 
 > Some usage instructions
+- npm install
+- npm start
 
 ## Requirements
 
 An `nvmrc` file is included if using [nvm](https://github.com/creationix/nvm).
 
 - Node 6.13.0
-- etc
+- MongoDB
 
 ## Development
 
